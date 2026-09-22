@@ -1,15 +1,28 @@
-# Indonésie 2026 — Java & Bali
+# 🇮🇩 Indonésie 2026 — carnet de voyage
 
-Carnet de voyage mobile-first pour le séjour du 8 au 29 décembre 2026.
+Version smartphone / GitHub Pages du voyage Java → Bali, du 8 au 29 décembre 2026.
 
-## Mise en ligne GitHub Pages
-1. Créer un dépôt GitHub et choisir `main` comme branche.
-2. Décompresser ce dossier et pousser son contenu.
-3. GitHub Actions télécharge automatiquement les photos dans `assets/images/` avant le déploiement.
-4. Dans **Settings → Pages**, choisir **GitHub Actions** si GitHub le demande.
+## 🖼️ Visuels
 
-## Photos
-Les visuels sont référencés depuis Wikimedia Commons et sont téléchargés au moment du build. Les licences et auteurs doivent être vérifiés sur les pages de fichiers correspondantes avant une republication publique.
+Les visuels sont **intégrés physiquement dans le dépôt** dans `assets/images/`. Le site ne dépend donc pas d'un téléchargement d'images au moment du déploiement.
 
-## Mobile
-Le carnet est responsive, installable comme PWA, avec navigation tactile, cartes et typographie adaptée aux écrans de téléphone.
+Les images sont des créations originales générées pour ce carnet, puis découpées et optimisées pour l'affichage mobile.
+
+## 📱 Publication sur GitHub Pages
+
+1. Créer un dépôt GitHub.
+2. Copier le contenu de ce dossier dans le dépôt.
+3. Pousser sur la branche `main`.
+4. Le workflow `.github/workflows/pages.yml` publie automatiquement le site avec GitHub Pages.
+
+## Structure
+
+- `index.html` — carnet interactif
+- `assets/images/` — visuels locaux
+- `assets/icon.svg` — icône
+- `manifest.webmanifest` — configuration PWA
+- `.github/workflows/pages.yml` — publication GitHub Pages
+
+## 📲 Smartphone
+
+L'interface est conçue mobile-first : grandes images, cartes verticales, navigation tactile, progression du voyage, carte interactive et accès rapide aux réservations/étapes.
