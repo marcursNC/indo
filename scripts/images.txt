@@ -1,0 +1,14 @@
+assets/images/borobudur.jpg|https://upload.wikimedia.org/wikipedia/commons/c/c7/Sunrise_over_Borobudur.jpg
+assets/images/prambanan.jpg|https://upload.wikimedia.org/wikipedia/commons/7/7c/Candi_Prambanan_di_Yogyakarta.jpg
+assets/images/bromo.jpg|https://upload.wikimedia.org/wikipedia/commons/1/16/Mount_Bromo_Sunrise.jpg
+assets/images/ijen.jpg|https://upload.wikimedia.org/wikipedia/commons/3/35/Ijen_volcano_sunrise.jpg
+assets/images/meru-betiri.jpg|https://upload.wikimedia.org/wikipedia/commons/5/57/Landscape_Meru_Betiri_NP_-_East_Java_S4E2410_%2830019388522%29.jpg
+assets/images/sukamade-turtle.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/Green%20Sea%20Turtle%20laying%20her%20eggs%20on%20Sukamade%20beach.jpg
+assets/images/munduk.jpg|https://upload.wikimedia.org/wikipedia/commons/5/5b/Munduk_village_Bali.jpg
+assets/images/waterfall.jpg|https://upload.wikimedia.org/wikipedia/commons/4/4e/Munduk_Bali_waterfall.jpg
+assets/images/twin-lakes.jpg|https://upload.wikimedia.org/wikipedia/commons/6/6f/Twin_Lakes_Bali.jpg
+assets/images/sidemen.jpg|https://upload.wikimedia.org/wikipedia/commons/0/0c/Sidemen_Bali_rice_terraces.jpg
+assets/images/batur.jpg|https://upload.wikimedia.org/wikipedia/commons/1/1b/Mount_Batur_sunrise_Bali.jpg
+assets/images/jungle.jpg|https://upload.wikimedia.org/wikipedia/commons/2/2e/Bali_jungle_waterfall.jpg
+assets/images/alasari.jpg|https://upload.wikimedia.org/wikipedia/commons/9/93/Bali_bamboo_house.jpg
+assets/images/ubud.jpg|https://upload.wikimedia.org/wikipedia/commons/8/8e/Ubud_Bali_rice_fields.jpg

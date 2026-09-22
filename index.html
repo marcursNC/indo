@@ -24,7 +24,7 @@ a{color:inherit}
 .hero{min-height:92vh;display:grid;place-items:center;position:relative;overflow:hidden;color:white;
   background:
   linear-gradient(180deg,rgba(12,27,22,.25),rgba(12,27,22,.72)),
-  url("https://upload.wikimedia.org/wikipedia/commons/c/c7/Sunrise_over_Borobudur.jpg") center/cover;
+  url("assets/images/borobudur.jpg") center/cover;
 }
 .hero:after{content:"";position:absolute;inset:auto 0 0;height:180px;background:linear-gradient(transparent,var(--cream))}
 .hero-inner{position:relative;z-index:2;width:min(1050px,88vw);padding:100px 0 120px}
@@ -95,7 +95,10 @@ footer a{color:var(--forest)}
   .plan{grid-template-columns:1fr}
 }
 </style>
-</head>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#1d3a31"><link rel="apple-touch-icon" href="assets/icon.svg">
+<style>
+@media(max-width:700px){.hero{min-height:88svh}.hero-inner{padding:72px 0 90px}.hero h1{font-size:clamp(3rem,17vw,5rem)}.nav-inner{overflow:auto;justify-content:flex-start}.nav a{white-space:nowrap;margin-left:0;margin-right:16px}.container{width:min(94vw,1180px)}.section{padding:58px 0}.day{padding:22px}.day-top{display:block}.day-top .badge{display:inline-block;margin-top:10px}.grid2,.grid3{grid-template-columns:1fr!important}.table-wrap{overflow-x:auto}.table-wrap table{min-width:720px}.map-wrap{height:360px}.hero-meta{gap:7px}.pill{font-size:.78rem}.card img,.photo{max-height:52svh;object-fit:cover}}
+</style></head>
 <!-- Critère éditorial interne : rechercher en priorité des hébergements à 5 000 XPF/nuit maximum, sans afficher ce plafond dans le carnet. -->
 <body>
 <header class="hero">
@@ -168,7 +171,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">08</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/c/c7/Sunrise_over_Borobudur.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/borobudur.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Mardi 8 décembre · arrivée</div><h3>Nouméa → Denpasar</h3></div><span class="badge save">SAVE</span></div>
       <p class="day-desc">Départ de Nouméa à 08h30, arrivée à Denpasar à 19h45. Nuit simple et pratique près de l'aéroport : pas de course vers Java le soir même.</p>
@@ -181,7 +184,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">09</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/7/7c/Candi_Prambanan_di_Yogyakarta.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/prambanan.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Mercredi 9 décembre · Yogyakarta</div><h3>Prambanan & vieux Jogja</h3></div><span class="badge key">CULTURE</span></div>
       <p class="day-desc">Vol matinal DPS → YIA, transfert privé et visite de Prambanan avant de rejoindre Yogyakarta. Fin de journée lente dans les quartiers historiques.</p>
@@ -194,7 +197,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">10</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/c/c7/Sunrise_over_Borobudur.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/borobudur.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Jeudi 10 décembre · Borobudur</div><h3>Le matin suspendu</h3></div><span class="badge splurge">SPLURGE</span></div>
       <p class="day-desc">Départ très tôt vers Borobudur. Le moment fort : l'expérience Sunrise, puis Pawon, Mendut et les villages autour du temple. Nuit dans un homestay de caractère.</p>
@@ -207,7 +210,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">11</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/7/7c/Candi_Prambanan_di_Yogyakarta.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/prambanan.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Vendredi 11 décembre · vers l'Est</div><h3>Le train, puis la montagne</h3></div><span class="badge save">SAVE</span></div>
       <p class="day-desc">Retour vers Yogyakarta puis train vers Malang. Ensuite, voiture locale vers Tumpang et les villages Tengger. On entre progressivement dans un autre Java.</p>
@@ -220,7 +223,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">12</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/1/16/Mount_Bromo_Sunrise.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/bromo.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Samedi 12 décembre · Bromo</div><h3>La caldeira au lever du jour</h3></div><span class="badge splurge">SPLURGE</span></div>
       <p class="day-desc">Départ nocturne. Expérience privée autour du Bromo : viewpoint selon météo, mer de sable, Luhur Poten et montée au cratère. L'approche par les villages Tengger reste le fil conducteur.</p>
@@ -233,7 +236,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">13</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/1/16/Mount_Bromo_Sunrise.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/bromo.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Dimanche 13 décembre · vers Ijen</div><h3>Du volcan à la jungle de l'Est</h3></div><span class="badge key">TRANSITION</span></div>
       <p class="day-desc">Journée de transfert Bromo → Banyuwangi/Licin en voiture privée. Le choix volontaire : payer le confort sur ce tronçon pour éviter une succession de transports.</p>
@@ -246,7 +249,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">14</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/3/35/Ijen_volcano_sunrise.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/ijen.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Lundi 14 décembre · Ijen</div><h3>La nuit du soufre</h3></div><span class="badge splurge">EXPÉRIENCE</span></div>
       <p class="day-desc">Départ vers 01h00–01h30. Trek nocturne, accès au cratère selon les conditions et règles du moment, puis lever du jour sur le lac acide. Journée volontairement légère après la descente.</p>
@@ -259,7 +262,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">15</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/57/Landscape_Meru_Betiri_NP_-_East_Java_S4E2410_%2830019388522%29.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/meru-betiri.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Mardi 15 décembre · Meru Betiri</div><h3>La route qui disparaît</h3></div><span class="badge key">WILDERNESS</span></div>
       <p class="day-desc">Départ vers Rajegwesi avec un 4x4 local. Plage, village de pêcheurs, forêt et éventuellement Green Bay selon état des pistes et timing.</p>
@@ -272,7 +275,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">16</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Green%20Sea%20Turtle%20laying%20her%20eggs%20on%20Sukamade%20beach.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/sukamade-turtle.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Mercredi 16 décembre · Sukamade</div><h3>La nuit des tortues</h3></div><span class="badge splurge">SENSATION</span></div>
       <p class="day-desc">4x4 vers Sukamade à travers la jungle. Installation très simple, puis sortie nocturne encadrée pour observer la ponte des tortues sur la plage protégée.</p>
@@ -285,7 +288,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">17</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/57/Landscape_Meru_Betiri_NP_-_East_Java_S4E2410_%2830019388522%29.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/meru-betiri.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Jeudi 17 décembre · Java → Bali</div><h3>La sortie de la jungle</h3></div><span class="badge save">SAVE</span></div>
       <p class="day-desc">Retour par Rajegwesi puis Banyuwangi/Ketapang. Ferry vers Gilimanuk et transfert vers Munduk. Aucun programme ambitieux le soir : douche, dîner, sommeil.</p>
@@ -312,7 +315,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">17</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/5/5b/Munduk_village_Bali.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/munduk.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Jeudi 17 décembre · Bali Nord</div><h3>Sortir de la jungle, entrer dans les montagnes</h3></div><span class="badge key">TRANSITION</span></div>
       <p class="day-desc">Après le ferry Gilimanuk, transfert vers Munduk. Cette journée reste volontairement légère : installation, panorama, dîner et première respiration après Java.</p>
@@ -325,7 +328,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">18</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/4/4e/Munduk_Bali_waterfall.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/waterfall.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Vendredi 18 décembre · Munduk</div><h3>Cascades & forêt tropicale</h3></div><span class="badge splurge">NATURE</span></div>
       <p class="day-desc">Grande randonnée autour des cascades de Munduk, plantations de café, clous de girofle et forêt humide. C’est ici que l’on ralentit vraiment.</p>
@@ -338,7 +341,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">19</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/6/6f/Twin_Lakes_Bali.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/twin-lakes.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Samedi 19 décembre · Munduk</div><h3>Lacs de montagne & crêtes</h3></div><span class="badge save">SAVE</span></div>
       <p class="day-desc">Deuxième journée de randonnée, autour des lacs Buyan et Tamblingan selon les conditions. Objectif : privilégier les petits chemins, les points de vue et les villages plutôt que les attractions très fréquentées.</p>
@@ -351,7 +354,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">20</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/0/0c/Sidemen_Bali_rice_terraces.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/sidemen.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Dimanche 20 décembre · Sidemen</div><h3>Les rizières de l'Est</h3></div><span class="badge key">IMMERSION</span></div>
       <p class="day-desc">Route vers Sidemen. Installation dans une adresse avec vue sur les rizières, puis première marche au milieu des terrasses et des villages.</p>
@@ -364,7 +367,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">21</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/0/0c/Sidemen_Bali_rice_terraces.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/sidemen.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Lundi 21 décembre · Sidemen</div><h3>Une journée sans voiture</h3></div><span class="badge save">SAVE</span></div>
       <p class="day-desc">Journée consacrée à Sidemen : randonnée dans les rizières, petits temples, artisanat et déjeuner dans un warung. Le but est de laisser de la place à l’imprévu.</p>
@@ -377,7 +380,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">22</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/1/1b/Mount_Batur_sunrise_Bali.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/batur.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Mardi 22 décembre · Mont Batur</div><h3>Volcan à l'aube</h3></div><span class="badge splurge">VOLCAN</span></div>
       <p class="day-desc">Transfert vers la région de Batur. Selon l’énergie et la météo : ascension nocturne du Mont Batur pour le lever du soleil, puis sources chaudes ou balade autour du lac.</p>
@@ -390,7 +393,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">23</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/2/2e/Bali_jungle_waterfall.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/jungle.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Mercredi 23 décembre · Bangli</div><h3>Transition vers la retraite cachée</h3></div><span class="badge key">LENTEUR</span></div>
       <p class="day-desc">Journée tampon entre Batur et votre réservation. On peut explorer Bangli, un temple local ou une cascade, puis rejoindre tranquillement la région de Seribatu.</p>
@@ -403,7 +406,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">24</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/93/Bali_bamboo_house.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/alasari.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Jeudi 24 décembre · Seribatu / Bangli</div><h3>Alasari Hidden Bamboo Retreat</h3></div><span class="badge splurge">RÉSERVÉ ✓</span></div>
       <p class="day-desc">Installation dans votre villa 1 chambre au Alasari Hidden Bamboo Retreat in the Jungle. Petit-déjeuner compris, salle de bains privative, terrasse, jardin et kitchenette. Le vrai luxe de Noël : être cachés dans la jungle.</p>
@@ -416,7 +419,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">25</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/2/2e/Bali_jungle_waterfall.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/jungle.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Vendredi 25 décembre · Jungle de Bangli</div><h3>Noël au vert</h3></div><span class="badge splurge">RÉSERVÉ ✓</span></div>
       <p class="day-desc">Pas de programme touristique imposé. Randonnée depuis la retraite ou excursion courte dans les environs, puis retour à la villa. Journée pensée comme une parenthèse.</p>
@@ -429,7 +432,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">26</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/93/Bali_bamboo_house.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/alasari.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Samedi 26 décembre · Retraite</div><h3>La journée blanche</h3></div><span class="badge save">RESPIRER</span></div>
       <p class="day-desc">Dernière journée complète à Alasari. On privilégie le rythme naturel : petit-déjeuner, lecture, baignade si disponible, marche dans les environs et coucher de soleil.</p>
@@ -442,7 +445,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">27</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/8/8e/Ubud_Bali_rice_fields.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/ubud.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Dimanche 27 décembre · Ubud</div><h3>Retour à la civilisation</h3></div><span class="badge key">UBUD</span></div>
       <p class="day-desc">Check-out d’Alasari avant midi et route vers Ubud. Installation pour les deux dernières nuits. Fin de journée dans les ruelles, galeries et temples d’Ubud.</p>
@@ -455,7 +458,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">28</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/8/8e/Ubud_Bali_rice_fields.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/ubud.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Lundi 28 décembre · Ubud</div><h3>Dernier jour : Bali en douceur</h3></div><span class="badge splurge">DERNIÈRE SOIRÉE</span></div>
       <p class="day-desc">Dernière journée complète : balade dans les rizières de Campuhan ou autour d’Ubud, massage, dîner soigné et préparation du retour. Pas d'excursion lointaine.</p>
@@ -468,7 +471,7 @@ footer a{color:var(--forest)}
 <article class="day">
   <div class="day-dot">29</div>
   <div class="card day-card">
-    <div class="day-photo" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/8/8e/Ubud_Bali_rice_fields.jpg')"></div>
+    <div class="day-photo" style="background-image:url('assets/images/ubud.jpg')"></div>
     <div class="day-body">
       <div class="day-top"><div><div class="date">Mardi 29 décembre · retour</div><h3>Ubud → Denpasar → Nouméa</h3></div><span class="badge key">✈️ 21H00</span></div>
       <p class="day-desc">Matinée libre à Ubud, puis départ suffisamment tôt pour rejoindre l'aéroport. Vol retour depuis Denpasar à 21h00, arrivée à Nouméa le 30 décembre à 11h45.</p>
@@ -732,5 +735,5 @@ places.forEach((p,i)=>{
 });
 map.fitBounds(L.latLngBounds(pts),{padding:[25,25]});
 </script>
-</body>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script></body>
 </html>
