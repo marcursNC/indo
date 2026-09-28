@@ -1,514 +1,792 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Indonésie 2026 · Hébergements Booking</title>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0c241c">
+<meta name="description" content="Carnet de voyage premium — Indonésie Java & Bali, décembre 2026">
+<title>Indonésie 2026 · Carnet de voyage</title>
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <style>
-:root{--bg:#07111e;--card:#0d1b2b;--line:#20364d;--txt:#f5f7fa;--muted:#a9b8c8;--green:#35d09e;--gold:#e0b653}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#06101c,#0a1726);color:var(--txt);font:15px system-ui,-apple-system,Segoe UI,sans-serif}
-header{position:sticky;top:0;z-index:5;padding:22px 16px;background:rgba(6,16,28,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-h1{margin:0;font-size:27px}header p{color:var(--muted);margin:7px 0 0}.bar{display:flex;gap:6px;overflow:auto;margin-top:14px}.dot{padding:7px 10px;border-radius:99px;background:#16283b;color:#9eb0c1;font-size:12px}.dot.done{background:var(--green);color:#052118;font-weight:800}
-main{max-width:900px;margin:auto;padding:15px 13px 50px}.intro,.stage,.summary{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:13px}.intro strong{color:var(--green)}
-.stage{scroll-margin-top:105px}.stagetop{display:flex;justify-content:space-between;gap:10px}.stagetop span{color:var(--green);font-weight:800;font-size:13px}.stagetop h2{margin:3px 0;font-size:21px}.stagetop small{color:var(--muted)}
-.selected{margin:12px 0;padding:10px;border:1px dashed #35516b;border-radius:10px;color:var(--muted);font-size:13px}.tips{margin:12px 0 14px;padding:13px;border-radius:14px;background:#0a1726;border:1px solid #29445d}.tips h3{margin:0 0 9px;font-size:15px;color:#f2d58a}.tip{display:grid;grid-template-columns:105px 1fr;gap:8px;padding:8px 0;border-top:1px solid #1c3045;font-size:12px;line-height:1.4}.tip:first-of-type{border-top:0}.tip strong{color:#dce8f2}.tip span{color:#aebdcc}@media(max-width:600px){.tip{grid-template-columns:1fr;gap:2px}}.selected.active{border-color:var(--green);color:var(--txt)}
-.hotel{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);padding:12px 0}.hotel b{display:block}.hotel small{display:block;color:var(--muted);margin-top:3px}.actions{display:flex;gap:6px;flex-shrink:0}button,.book,.fixed{border:0;border-radius:9px;padding:9px 10px;font-size:12px;font-weight:800;text-decoration:none;cursor:pointer}.choose{background:#1c334b;color:#fff}.choose.chosen{background:var(--green);color:#052118}.book{background:#fff;color:#0a1929}.fixed{background:var(--gold);color:#261b00}
-.summary{position:sticky;bottom:10px;background:rgba(9,22,37,.97);box-shadow:0 10px 30px #0005}.summary h3{margin:0 0 8px}.list{display:grid;grid-template-columns:1fr 1fr;gap:5px 15px;color:var(--muted);font-size:12px}.clear{margin-top:10px;background:transparent;color:var(--muted);border:1px solid #38516a}
-@media(max-width:600px){.stagetop{display:block}.stagetop small{display:block;margin-top:4px}.hotel{align-items:flex-start}.actions{flex-direction:column}.list{grid-template-columns:1fr}.book,.choose{min-width:85px;text-align:center}}
+:root{--ink:#10231c;--ink2:#18352a;--paper:#f6f4ed;--paper2:#fffdf8;--muted:#718078;--line:#dfe5dc;--sage:#cbd9c8;--green:#174b37;--green2:#2d7456;--lime:#dce9b7;--gold:#c99d48;--orange:#c76e42;--shadow:0 18px 55px rgba(20,48,36,.12);--radius:24px;--max:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button,a{font:inherit}button{cursor:pointer}a{color:inherit}.app{min-height:100vh;padding-bottom:88px}.wrap{max-width:var(--max);margin:auto;padding:0 18px}.top{position:sticky;top:0;z-index:50;background:rgba(246,244,237,.84);backdrop-filter:blur(18px);border-bottom:1px solid rgba(223,229,220,.75)}.topin{height:68px;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none}.brandmark{width:38px;height:38px;border-radius:13px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:19px;box-shadow:0 8px 22px rgba(23,75,55,.22)}.brand strong{display:block;font-size:14px;letter-spacing:.02em}.brand small{display:block;color:var(--muted);font-size:11px}.top-actions{display:flex;gap:8px}.iconbtn{width:42px;height:42px;border:1px solid var(--line);background:rgba(255,255,255,.65);border-radius:14px;display:grid;place-items:center;color:var(--ink)}
+.hero{padding:22px 0 10px}.hero-card{position:relative;overflow:hidden;min-height:440px;border-radius:32px;background:radial-gradient(circle at 75% 20%,#497d5f 0,#214d3a 28%,#0d2a20 66%,#071a14 100%);color:#fff;box-shadow:var(--shadow)}.hero-card:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,0,0,.08),transparent 45%,rgba(0,0,0,.25)),radial-gradient(circle at 15% 95%,rgba(220,233,183,.2),transparent 30%)}.moon{position:absolute;width:180px;height:180px;border-radius:50%;right:8%;top:9%;background:radial-gradient(circle at 35% 35%,#fff9dd,#d7e2c8 65%,#a8baa9);box-shadow:0 0 80px rgba(235,244,212,.22)}.mount{position:absolute;left:-5%;right:-5%;bottom:-3px;height:210px;background:linear-gradient(150deg,transparent 24%,#123c2c 25%,#123c2c 41%,transparent 42%),linear-gradient(28deg,#0a2118 30%,transparent 31%),linear-gradient(152deg,transparent 50%,#28543e 51%,#28543e 64%,transparent 65%);opacity:.95}.hero-copy{position:relative;z-index:2;max-width:650px;padding:42px 36px}.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.08);font-size:11px;letter-spacing:.08em;text-transform:uppercase}.hero h1{font-family:Georgia,serif;font-size:clamp(42px,7vw,76px);line-height:.94;margin:18px 0 14px;letter-spacing:-.055em}.hero p{max-width:570px;color:#d7e4db;font-size:16px;margin:0}.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}.chip{padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);font-size:12px}.hero-cta{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px}.cta{border:0;border-radius:14px;padding:12px 16px;font-weight:800;text-decoration:none}.cta.primary{background:#f7f1df;color:var(--green)}.cta.ghost{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.18)}
+.section{padding:26px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}.section-head h2{font-family:Georgia,serif;font-size:29px;margin:0;letter-spacing:-.025em}.section-head p{margin:3px 0 0;color:var(--muted)}.kicker{font-size:11px;color:var(--green2);font-weight:900;text-transform:uppercase;letter-spacing:.1em}
+.overview{display:grid;grid-template-columns:1.3fr .7fr;gap:14px}.panel{background:var(--paper2);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 28px rgba(20,48,36,.045)}.progress-panel{padding:22px}.progress-row{display:flex;justify-content:space-between;align-items:end}.progress-number{font:700 42px Georgia,serif}.muted{color:var(--muted)}.progressbar{height:9px;background:#e7ece5;border-radius:99px;overflow:hidden;margin:14px 0}.progressbar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),#77a36c);border-radius:99px;transition:width .5s}.microgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.micro{padding:11px;background:#f1f3ec;border-radius:15px}.micro b{display:block;font-size:17px}.micro small{color:var(--muted)}.next{padding:22px;background:var(--green);color:#fff;display:flex;flex-direction:column;justify-content:space-between}.next .kicker{color:#bcd6a7}.next h3{font:700 26px Georgia,serif;margin:7px 0}.next p{color:#d7e5dc;margin:0}.next button{align-self:flex-start;margin-top:18px;border:0;background:#f7f1df;color:var(--green);border-radius:13px;padding:11px 14px;font-weight:900}
+.timeline{display:flex;gap:8px;overflow:auto;padding:4px 2px 12px;scrollbar-width:none}.timeline::-webkit-scrollbar{display:none}.daydot{min-width:76px;border:1px solid var(--line);background:var(--paper2);border-radius:17px;padding:9px 8px;text-align:center}.daydot b{display:block;font-size:12px}.daydot small{display:block;color:var(--muted);font-size:10px;margin-top:2px;white-space:nowrap}.daydot.active{background:var(--green);border-color:var(--green);color:#fff}.daydot.done{border-color:#a9c0ad}.daydot.done b:before{content:"✓ ";color:var(--green2)}.daydot.active b:before{color:#fff}
+.days{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.day{padding:19px;transition:transform .2s,box-shadow .2s}.day:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.daytop{display:flex;justify-content:space-between;gap:10px}.datepill{font-size:11px;font-weight:900;color:var(--green2);background:#eaf0e8;border-radius:999px;padding:6px 9px}.day h3{font:700 24px Georgia,serif;margin:12px 0 6px}.day p{color:#52635a;margin:0 0 14px}.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:11px;padding:6px 8px;border-radius:999px;background:#f0f1eb;color:#4e5f55}.day-actions{display:flex;gap:7px;margin-top:16px}.smallbtn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 11px;font-size:12px;font-weight:800}.smallbtn.primary{background:var(--green);border-color:var(--green);color:#fff}
+.stage-list{display:grid;gap:14px}.stage-card{overflow:hidden}.stage-photo{height:190px;background-size:cover;background-position:center;position:relative}.stage-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,20,15,.02) 25%,rgba(7,20,15,.42) 100%)}.stage-photo-label{position:absolute;left:16px;bottom:14px;z-index:1;color:#fff;font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:999px;background:rgba(0,0,0,.22);backdrop-filter:blur(8px)}.stage-card{overflow:hidden}.stage-summary{padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer}.stage-num{width:44px;height:44px;border-radius:15px;background:#e8eee7;color:var(--green);display:grid;place-items:center;font-weight:900;flex:none}.stage-main{flex:1}.stage-main b{display:block;font-size:17px}.stage-main small{color:var(--muted)}.stage-right{text-align:right}.stage-right strong{display:block;font-size:12px}.stage-right span{font-size:11px;color:var(--muted)}.chev{font-size:20px;color:#8b9991;transition:transform .2s}.stage-card.open .chev{transform:rotate(180deg)}.stage-body{display:none;border-top:1px solid var(--line);padding:0 18px 18px}.stage-card.open .stage-body{display:block}.tipbox{background:#f0f4ec;border-radius:17px;padding:14px;margin:15px 0}.tipbox b{color:var(--green)}.hotel-search{width:100%;border:1px solid var(--line);background:#fff;border-radius:13px;padding:11px 12px;margin:5px 0 11px;outline:none}.hotel-search:focus{border-color:#7ca089;box-shadow:0 0 0 3px rgba(45,116,86,.1)}.hotel{display:grid;grid-template-columns:1fr auto;gap:12px;padding:14px 0;border-top:1px solid #edf0eb}.hotel-name{font-weight:850}.hotel-meta{font-size:12px;color:var(--muted);margin-top:3px}.rating{display:inline-block;color:#956b20;font-weight:800;margin-left:4px}.hotel-actions{display:flex;align-items:center;gap:6px}.choose{border:0;border-radius:11px;background:#e7eee7;color:var(--green);padding:9px 10px;font-size:12px;font-weight:900}.choose.selected{background:var(--green);color:#fff}.book{border:0;border-radius:11px;background:#111f19;color:#fff;padding:9px 10px;font-size:12px;font-weight:900;text-decoration:none}.reserved{border-radius:11px;background:#f0dfb8;color:#694d12;padding:9px 10px;font-size:12px;font-weight:900}
+.map{height:430px;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}.mapbar{display:flex;flex-wrap:wrap;gap:7px;margin:11px 0}.mapbar span{padding:7px 9px;background:#eaf0e8;color:var(--green);border-radius:999px;font-size:11px;font-weight:800}.maplinks{display:flex;gap:8px;flex-wrap:wrap}.maplinks a{padding:10px 12px;background:var(--green);color:#fff;border-radius:12px;text-decoration:none;font-size:12px;font-weight:800}
+.checkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.check{padding:15px;display:flex;gap:11px;align-items:flex-start}.check input{width:19px;height:19px;accent-color:var(--green);margin-top:2px}.check b{display:block}.check small{color:var(--muted)}
+.btm{position:fixed;z-index:100;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(680px,calc(100% - 22px));background:rgba(16,35,28,.94);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:7px;display:grid;grid-template-columns:repeat(5,1fr);box-shadow:0 20px 55px rgba(4,22,14,.28)}.navbtn{border:0;background:transparent;color:#aabbb1;border-radius:16px;padding:8px 4px;font-size:10px;font-weight:800}.navbtn span{display:block;font-size:18px;line-height:20px;margin-bottom:2px}.navbtn.active{background:#f3f0e5;color:var(--green)}
+.modal{position:fixed;inset:0;z-index:200;display:none;background:rgba(7,20,15,.5);backdrop-filter:blur(8px);padding:18px}.modal.show{display:grid;place-items:end center}.sheet{width:min(720px,100%);max-height:90vh;overflow:auto;background:var(--paper2);border-radius:28px 28px 18px 18px;box-shadow:0 30px 80px rgba(0,0,0,.28);padding:22px}.sheethead{display:flex;justify-content:space-between;gap:12px}.close{border:0;background:#eef1eb;border-radius:12px;width:42px;height:42px}.sheet h2{font:700 32px Georgia,serif;margin:5px 0}.sheet p{color:#56665e}.sheet ul{padding-left:19px}.sheet li{margin:7px 0}.sheet .route{padding:13px;border-radius:15px;background:#eef3ec;margin:14px 0;font-weight:750;color:var(--green)}
+.toast{position:fixed;z-index:300;left:50%;bottom:104px;transform:translate(-50%,15px);background:#10231c;color:#fff;padding:11px 15px;border-radius:13px;opacity:0;pointer-events:none;transition:.25s;box-shadow:var(--shadow);font-size:12px}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.stage-photo{height:150px}.hero-card{min-height:520px}.hero-copy{padding:34px 24px}.moon{width:130px;height:130px;right:5%;top:12%}.overview{grid-template-columns:1fr}.days{grid-template-columns:1fr}.checkgrid{grid-template-columns:1fr}.hotel{grid-template-columns:1fr}.hotel-actions{justify-content:flex-start}.map{height:330px}.section{padding:22px 0}.stage-summary{padding:15px}.stage-right{display:none}.microgrid{grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-<style id="master-mobile">
-html{scroll-behavior:smooth} body{margin:0;background:#fafbf9;color:#17221c}
-#master table td,#master table th{border-bottom:1px solid #e7ebe8;font-size:14px}
-#master table td{padding:10px 11px;vertical-align:top}
-@media(max-width:600px){
-  #master{padding:0 10px!important}
-  #master h2{font-size:28px!important}
-  #master h3{font-size:20px}
-  #master table{min-width:720px}
-}
-</style>
-
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
- integrity="sha256-p4NxAoJBhIINfQ3j6Vq5r5vQhJf0hR3p7t4cZ7rXg=" crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
- integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-<style id="real-map-ui">
-.realmap{height:360px;border-radius:20px;overflow:hidden;margin:10px 0;border:1px solid #dfe6e1;box-shadow:0 5px 18px #00000010}
-.mapmeta{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.mapmeta span{background:#edf3ee;color:#173b2c;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:700}
-.maplinks{display:flex;gap:8px;flex-wrap:wrap}.maplinks a{background:#173b2c;color:white;text-decoration:none;border-radius:12px;padding:10px 12px;font-size:12px;font-weight:700}
-@media(max-width:600px){.realmap{height:300px}}
-</style>
-</head><body>
-<header><h1>🇮🇩 Mes hébergements</h1><p>Sélectionne ton logement <b>étape par étape</b>, puis ouvre directement Booking.</p><div class="bar"><div class="dot" id="d-s0">1</div><div class="dot" id="d-s1">2</div><div class="dot" id="d-s2">3</div><div class="dot" id="d-s3">4</div><div class="dot" id="d-s4">5</div><div class="dot" id="d-s5">6</div><div class="dot" id="d-s6">7</div><div class="dot" id="d-s7">8</div><div class="dot" id="d-s8">9</div></div></header>
-<main><div class="intro"><strong>Principe</strong><br>« Choisir » mémorise ton choix sur ce téléphone. « Booking ↗ » ouvre la fiche correspondant exactement aux dates recherchées. Les prix sont ceux constatés lors de la recherche et peuvent évoluer.</div>
-<section id="s0" class="stage"><div class="stagetop"><div><span>J2 · Yogyakarta</span><h2>Yogyakarta</h2></div><small>9 → 10 déc. · 1 nuit</small></div><div id="sel-s0" class="selected">Aucun choix</div><div class="tips"><h3>💡 Trucs, astuces & bons plans</h3><div class="tip"><strong>💡 Bon plan</strong><span>Prawirotaman est plus local et agréable le soir ; Malioboro est plus central et animé.</span></div><div class="tip"><strong>🚗 Astuce</strong><span>Un chauffeur à la journée simplifie Prambanan puis les déplacements autour de Jogja.</span></div><div class="tip"><strong>🌅 À savoir</strong><span>Garder une soirée légère : Borobudur peut imposer un départ très matinal.</span></div></div><div class="hotel"><div><b>Rajaklana Resort and Spa</b><small>4,251 XPF · 9.2/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s0','Rajaklana Resort and Spa')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/rajaklana-resort-villa-amp-spa.html?aid=2438770&amp;checkin=2026-12-09&amp;checkout=2026-12-10&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Greenhost Boutique Hotel Prawirotaman</b><small>4,635 XPF · 8.8/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s0','Greenhost Boutique Hotel Prawirotaman')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/greenhost-boutique.html?aid=2438770&amp;checkin=2026-12-09&amp;checkout=2026-12-10&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Gallery Prawirotaman Hotel</b><small>4,477 XPF · 8.6/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s0','Gallery Prawirotaman Hotel')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/gallery-prawirotaman.html?aid=2438770&amp;checkin=2026-12-09&amp;checkout=2026-12-10&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Aveta Hotel Malioboro</b><small>4,992 XPF · 8.3/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s0','Aveta Hotel Malioboro')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/aveta-yogyakarta.html?aid=2438770&amp;checkin=2026-12-09&amp;checkout=2026-12-10&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Meliá Purosani Yogyakarta</b><small>7,861 XPF · 8.8/10 · 5★</small></div><div class="actions"><button class="choose" onclick="pick('s0','Meliá Purosani Yogyakarta')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/melia-purosani.html?aid=2438770&amp;checkin=2026-12-09&amp;checkout=2026-12-10&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div></section><section id="s1" class="stage"><div class="stagetop"><div><span>J3 · Borobudur</span><h2>Borobudur</h2></div><small>10 → 11 déc. · 1 nuit</small></div><div id="sel-s1" class="selected">Aucun choix</div><div class="tips"><h3>💡 Trucs, astuces & bons plans</h3><div class="tip"><strong>🌿 Bon plan</strong><span>Dormir près de Borobudur évite une longue route avant le lever du soleil.</span></div><div class="tip"><strong>🥾 Astuce</strong><span>Après le temple, privilégier villages, vélo ou balade tranquille plutôt qu'un programme chargé.</span></div><div class="tip"><strong>📸 À savoir</strong><span>Décembre est humide : garder de la souplesse pour la météo.</span></div></div><div class="hotel"><div><b>Nalendro Villa Borobudur</b><small>2,410 XPF · 9.4/10 · 3★</small></div><div class="actions"><button class="choose" onclick="pick('s1','Nalendro Villa Borobudur')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/nalendro-villa-borobudur.html?aid=2438770&amp;checkin=2026-12-10&amp;checkout=2026-12-11&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Puunee Wild River Villa&#x27;s Borobudur</b><small>5,614 XPF · 9.3/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s1','Puunee Wild River Villa&#x27;s Borobudur')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/puunee-guest-house-amp-restaurant.html?aid=2438770&amp;checkin=2026-12-10&amp;checkout=2026-12-11&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Plataran Heritage Borobudur Hotel</b><small>14,062 XPF · 9.1/10 · 5★</small></div><div class="actions"><button class="choose" onclick="pick('s1','Plataran Heritage Borobudur Hotel')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/plataran-heritage-borobudur.html?aid=2438770&amp;checkin=2026-12-10&amp;checkout=2026-12-11&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>The Amrta Borobudur</b><small>3,888 XPF · 8.3/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s1','The Amrta Borobudur')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/amrta-guest-house.html?aid=2438770&amp;checkin=2026-12-10&amp;checkout=2026-12-11&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Lotus 2 Guest House</b><small>2,101 XPF · 8.2/10 · 1★</small></div><div class="actions"><button class="choose" onclick="pick('s1','Lotus 2 Guest House')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/lotus-2-homestay.html?aid=2438770&amp;checkin=2026-12-10&amp;checkout=2026-12-11&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div></section><section id="s2" class="stage"><div class="stagetop"><div><span>J4 · Malang / accès Bromo</span><h2>Malang</h2></div><small>11 → 12 déc. · 1 nuit</small></div><div id="sel-s2" class="selected">Aucun choix</div><div class="tips"><h3>💡 Trucs, astuces & bons plans</h3><div class="tip"><strong>🚆 Bon plan</strong><span>Réserver le train KAI dès l'ouverture des ventes pour sécuriser l'horaire vers Malang.</span></div><div class="tip"><strong>🧳 Astuce</strong><span>Préparer un petit sac pour Bromo afin d'éviter de fouiller les gros bagages.</span></div><div class="tip"><strong>🌋 À savoir</strong><span>Pour le lever du soleil, dormir au plus près de l'accès Bromo est plus pratique que dormir en centre-ville.</span></div></div><div class="hotel"><div><b>Hotel Tugu Malang</b><small>8,412 XPF · 9.4/10 · 5★</small></div><div class="actions"><button class="choose" onclick="pick('s2','Hotel Tugu Malang')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/tugu-malang.html?aid=2438770&amp;checkin=2026-12-11&amp;checkout=2026-12-12&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Ijen Suites Resort &amp; Convention</b><small>4,477 XPF · 8.2/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s2','Ijen Suites Resort &amp; Convention')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/ijen-suites-resort-amp-convention.html?aid=2438770&amp;checkin=2026-12-11&amp;checkout=2026-12-12&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>The Grand Palace Hotel Malang</b><small>3,213 XPF · 8.0/10 · 3★</small></div><div class="actions"><button class="choose" onclick="pick('s2','The Grand Palace Hotel Malang')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/the-grand-palace-malang.html?aid=2438770&amp;checkin=2026-12-11&amp;checkout=2026-12-12&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Hotel Trio Indah 2</b><small>3,247 XPF · 7.5/10 · 2★</small></div><div class="actions"><button class="choose" onclick="pick('s2','Hotel Trio Indah 2')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/trio-indah-2.html?aid=2438770&amp;checkin=2026-12-11&amp;checkout=2026-12-12&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div></section><section id="s3" class="stage"><div class="stagetop"><div><span>J6–J7 · Ijen / Banyuwangi</span><h2>Banyuwangi</h2></div><small>13 → 15 déc. · 2 nuits</small></div><div id="sel-s3" class="selected">Aucun choix</div><div class="tips"><h3>💡 Trucs, astuces & bons plans</h3><div class="tip"><strong>🌋 Bon plan</strong><span>Un même chauffeur/coordinateur pour Bromo → Ijen simplifie fortement la logistique.</span></div><div class="tip"><strong>🌙 Astuce</strong><span>Préparer la veille vêtements chauds, chaussures adhérentes, lampe frontale et eau.</span></div><div class="tip"><strong>🩺 À savoir</strong><span>Vérifier juste avant le départ les conditions d'accès et les éventuelles exigences médicales d'Ijen.</span></div></div><div class="hotel"><div><b>Didu&#x27;s Homestay Bed &amp; Breakfast</b><small>4,208 XPF · 9.3/10 · 2★</small></div><div class="actions"><button class="choose" onclick="pick('s3','Didu&#x27;s Homestay Bed &amp; Breakfast')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/didu-39-s-homestay-bed-amp-breakfast.html?aid=2438770&amp;checkin=2026-12-13&amp;checkout=2026-12-15&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Ketapang Indah Hotel</b><small>6,826 XPF · 8.8/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s3','Ketapang Indah Hotel')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/ketapang-indah.html?aid=2438770&amp;checkin=2026-12-13&amp;checkout=2026-12-15&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Dialoog Banyuwangi</b><small>26,903 XPF · 9.2/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s3','Dialoog Banyuwangi')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/dialoog-banyuwangi-banyuwangi.html?aid=2438770&amp;checkin=2026-12-13&amp;checkout=2026-12-15&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Hotel Blambangan</b><small>6,134 XPF · 7.7/10 · 3★</small></div><div class="actions"><button class="choose" onclick="pick('s3','Hotel Blambangan')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/blambangan-banyuwangi.html?aid=2438770&amp;checkin=2026-12-13&amp;checkout=2026-12-15&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Banana Homestay</b><small>2,633 XPF · note non disponible</small></div><div class="actions"><button class="choose" onclick="pick('s3','Banana Homestay')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/banana-homestay-kabupaten-banyuwangi.html?aid=2438770&amp;checkin=2026-12-13&amp;checkout=2026-12-15&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div></section><section id="s4" class="stage"><div class="stagetop"><div><span>J10–J11 · Munduk</span><h2>Munduk</h2></div><small>17 → 19 déc. · 2 nuits</small></div><div id="sel-s4" class="selected">Aucun choix</div><div class="tips"><h3>💡 Trucs, astuces & bons plans</h3><div class="tip"><strong>🐢 Bon plan</strong><span>À Sukamade, réserver l'accompagnement des rangers pour l'observation respectueuse des tortues.</span></div><div class="tip"><strong>🚙 Astuce</strong><span>Prendre un sac souple : les pistes en 4×4 sont plus adaptées qu'une grosse valise.</span></div><div class="tip"><strong>🌧️ À savoir</strong><span>Prévoir protection pluie et vêtements pouvant être salis.</span></div></div><div class="hotel"><div><b>Made Oka Homestay and Warung</b><small>4,143 XPF · 8.7/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s4','Made Oka Homestay and Warung')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/made-oka-homestay-amp-warung.html?aid=2438770&amp;checkin=2026-12-17&amp;checkout=2026-12-19&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Nadya Homestay</b><small>6,763 XPF · 8.6/10 · 2★</small></div><div class="actions"><button class="choose" onclick="pick('s4','Nadya Homestay')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/nadya-homestay.html?aid=2438770&amp;checkin=2026-12-17&amp;checkout=2026-12-19&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Munduk Heaven Luxury Villas</b><small>15,143 XPF · 8.7/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s4','Munduk Heaven Luxury Villas')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/munduk-heaven.html?aid=2438770&amp;checkin=2026-12-17&amp;checkout=2026-12-19&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Giriwood Hotel &amp; Villa</b><small>17,683 XPF · 9.3/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s4','Giriwood Hotel &amp; Villa')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/giriwood-amp-villa.html?aid=2438770&amp;checkin=2026-12-17&amp;checkout=2026-12-19&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Munduk Moding Plantation Nature Resort</b><small>36,508 XPF · 9.6/10 · 5★</small></div><div class="actions"><button class="choose" onclick="pick('s4','Munduk Moding Plantation Nature Resort')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/munduk-moding-plantation-nature-resort.html?aid=2438770&amp;checkin=2026-12-17&amp;checkout=2026-12-19&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div></section><section id="s5" class="stage"><div class="stagetop"><div><span>J12–J14 · Sidemen</span><h2>Sidemen</h2></div><small>19 → 22 déc. · 3 nuits</small></div><div id="sel-s5" class="selected">Aucun choix</div><div class="tips"><h3>💡 Trucs, astuces & bons plans</h3><div class="tip"><strong>🌿 Bon plan</strong><span>À Munduk, privilégier une vue nature plutôt qu'un hébergement urbain.</span></div><div class="tip"><strong>🥾 Astuce</strong><span>Faire cascades et plantations le matin, puis garder l'après-midi plus libre.</span></div><div class="tip"><strong>☕ À découvrir</strong><span>Café, épices et plantations donnent une grande partie du caractère de Munduk.</span></div></div><div class="hotel"><div><b>Abian Ayu Villa</b><small>18,281 XPF · 9.3/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s5','Abian Ayu Villa')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/villa-abian-ayu.html?aid=2438770&amp;checkin=2026-12-19&amp;checkout=2026-12-22&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Devani Resort Sidemen</b><small>21,805 XPF · 9.1/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s5','Devani Resort Sidemen')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/devani-resort-sidemen.html?aid=2438770&amp;checkin=2026-12-19&amp;checkout=2026-12-22&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Patal Kikian Villa</b><small>42,826 XPF · 9.5/10 · 3★</small></div><div class="actions"><button class="choose" onclick="pick('s5','Patal Kikian Villa')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/patal-kikian-sidemen.html?aid=2438770&amp;checkin=2026-12-19&amp;checkout=2026-12-22&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Wapa di Ume Sidemen</b><small>51,945 XPF · 9.5/10 · 5★</small></div><div class="actions"><button class="choose" onclick="pick('s5','Wapa di Ume Sidemen')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/wapa-di-ume-sidemen.html?aid=2438770&amp;checkin=2026-12-19&amp;checkout=2026-12-22&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Kankhara Villas Sidemen</b><small>71,102 XPF · 9.6/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s5','Kankhara Villas Sidemen')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/kankhara-villas-sidemen.html?aid=2438770&amp;checkin=2026-12-19&amp;checkout=2026-12-22&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div></section><section id="s6" class="stage"><div class="stagetop"><div><span>J15–J16 · Batur</span><h2>Kintamani / Batur</h2></div><small>22 → 24 déc. · 2 nuits</small></div><div id="sel-s6" class="selected">Aucun choix</div><div class="tips"><h3>💡 Trucs, astuces & bons plans</h3><div class="tip"><strong>🌾 Bon plan</strong><span>À Sidemen, une vue sur les rizières apporte beaucoup à l'expérience.</span></div><div class="tip"><strong>🥾 Astuce</strong><span>Une marche accompagnée dans les rizières permet de mieux comprendre le paysage et les accès.</span></div><div class="tip"><strong>🛵 À savoir</strong><span>Pour les visites éloignées, préférer un chauffeur local ; garder la marche pour les villages.</span></div></div><div class="hotel"><div><b>The Lava Bali Villa and Hot Spring</b><small>12,324 XPF · 9.0/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s6','The Lava Bali Villa and Hot Spring')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/the-lava-bali-kabupaten-bangli1.html?aid=2438770&amp;checkin=2026-12-22&amp;checkout=2026-12-24&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Tira Vilagna Suites &amp; Spa</b><small>17,237 XPF · 9.0/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s6','Tira Vilagna Suites &amp; Spa')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/tira-vilagna-suites-amp-spa-kintamani-bali.html?aid=2438770&amp;checkin=2026-12-22&amp;checkout=2026-12-24&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Tegal Sari Cabin Kintamani</b><small>9,691 XPF · 8.7/10 · 3★</small></div><div class="actions"><button class="choose" onclick="pick('s6','Tegal Sari Cabin Kintamani')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/tegal-sari-cabin-kintamani.html?aid=2438770&amp;checkin=2026-12-22&amp;checkout=2026-12-24&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Pondok Devana Kintamani</b><small>9,691 XPF · 8.4/10 · 3★</small></div><div class="actions"><button class="choose" onclick="pick('s6','Pondok Devana Kintamani')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/pondok-devana-kintamani.html?aid=2438770&amp;checkin=2026-12-22&amp;checkout=2026-12-24&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Black Wood Cabin</b><small>16,011 XPF · 8.1/10 · 3★</small></div><div class="actions"><button class="choose" onclick="pick('s6','Black Wood Cabin')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/black-wood-cabin.html?aid=2438770&amp;checkin=2026-12-22&amp;checkout=2026-12-24&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div></section><section id="s7" class="stage"><div class="stagetop"><div><span>J17–J19 · Alasari</span><h2>Seribatu / Bangli</h2></div><small>24 → 27 déc. · 3 nuits</small></div><div id="sel-s7" class="selected">Aucun choix</div><div class="tips"><h3>💡 Trucs, astuces & bons plans</h3><div class="tip"><strong>♨️ Bon plan</strong><span>À Batur, choisir un logement pratique pour le départ très tôt et/ou les sources chaudes.</span></div><div class="tip"><strong>🌋 Astuce</strong><span>Garder le programme volcanique flexible selon météo et conditions d'accès.</span></div><div class="tip"><strong>🧥 À prévoir</strong><span>Une couche chaude est utile au lever du soleil en altitude.</span></div></div><div class="hotel"><div><b>Alasari Hidden Bamboo Retreat in the Jungle</b><small>✓ Réservation confirmée</small></div><div class="actions"><button class="choose" onclick="pick('s7','Alasari Hidden Bamboo Retreat in the Jungle')">Choisir</button><span class="fixed">RÉSERVÉ</span></div></div></section><section id="s8" class="stage"><div class="stagetop"><div><span>J20–J21 · Ubud</span><h2>Ubud</h2></div><small>27 → 29 déc. · 2 nuits</small></div><div id="sel-s8" class="selected">Aucun choix</div><div class="tips"><h3>💡 Trucs, astuces & bons plans</h3><div class="tip"><strong>🎋 Bon plan</strong><span>Alasari est la parenthèse jungle : éviter de multiplier les excursions.</span></div><div class="tip"><strong>🌿 Astuce</strong><span>Garder une vraie journée lente : nature, yoga, lecture et repas tranquille.</span></div><div class="tip"><strong>🎄 À savoir</strong><span>Réservation confirmée du 24 au 27 décembre : conserver ce point fixe.</span></div></div><div class="hotel"><div><b>Arcana Ubud</b><small>10,534 XPF · 9.8/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s8','Arcana Ubud')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/arcana-ubud.html?aid=2438770&amp;checkin=2026-12-27&amp;checkout=2026-12-29&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Jati Cottage</b><small>13,964 XPF · 9.0/10 · 3★</small></div><div class="actions"><button class="choose" onclick="pick('s8','Jati Cottage')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/jati-cottage.html?aid=2438770&amp;checkin=2026-12-27&amp;checkout=2026-12-29&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Purana Boutique Resort</b><small>17,345 XPF · 9.5/10 · 5★</small></div><div class="actions"><button class="choose" onclick="pick('s8','Purana Boutique Resort')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/purana-boutique-resort.html?aid=2438770&amp;checkin=2026-12-27&amp;checkout=2026-12-29&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>SenS Hotel and Spa</b><small>12,162 XPF · 8.4/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s8','SenS Hotel and Spa')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/sens-and-spa-conference-ubud-town-centre.html?aid=2438770&amp;checkin=2026-12-27&amp;checkout=2026-12-29&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div><div class="hotel"><div><b>Ulun Ubud Resort</b><small>21,456 XPF · 9.0/10 · 4★</small></div><div class="actions"><button class="choose" onclick="pick('s8','Ulun Ubud Resort')">Choisir</button><a class="book" href="https://www.booking.com/hotel/id/ulun-ubud-resort.html?aid=2438770&amp;checkin=2026-12-27&amp;checkout=2026-12-29&amp;no_rooms=1&amp;group_adults=2&amp;selected_currency=XPF" target="_blank" rel="noopener">Booking ↗</a></div></div></section>
-<div class="summary"><h3>🧳 Ma sélection</h3><div id="list" class="list"></div><button class="clear" onclick="clearAll()">Effacer mes choix</button></div>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="wrap topin"><a class="brand" href="#accueil" onclick="go('accueil')"><span class="brandmark">🌿</span><span><strong>INDONÉSIE · 2026</strong><small>Java → Bali · carnet de route</small></span></a><div class="top-actions"><button class="iconbtn" aria-label="Revenir à l'accueil" onclick="go('accueil')">⌂</button><button class="iconbtn" aria-label="Réinitialiser les choix" onclick="resetChoices()">↺</button></div></div></header>
+<main>
+<section id="accueil" class="wrap hero">
+ <div class="hero-card">
+  <div class="moon"></div><div class="mount"></div>
+  <div class="hero-copy">
+   <span class="eyebrow">08 → 29 décembre 2026 · 2 voyageurs</span>
+   <h1>Java sauvage.<br>Bali intime.</h1>
+   <p>Un voyage pensé comme une aventure : volcans, jungle, temples, villages et quelques parenthèses lentes. Tout est organisé ici, sans sacrifier la spontanéité.</p>
+   <div class="hero-meta"><span class="chip">🌋 Bromo · Ijen</span><span class="chip">🐢 Meru Betiri · Sukamade</span><span class="chip">🌿 Munduk · Sidemen</span><span class="chip">🎋 Alasari · jungle</span></div>
+   <div class="hero-cta"><button class="cta primary" onclick="go('itineraire')">Voir le voyage ↓</button><button class="cta ghost" onclick="go('reserver')">Réserver les étapes</button></div>
+  </div>
+ </div>
+</section>
+<section class="wrap section" id="dashboard">
+ <div class="overview">
+  <div class="panel progress-panel"><div class="progress-row"><div><span class="kicker">Tableau de bord</span><h2 style="margin:5px 0 0;font:700 25px Georgia,serif">Votre voyage en un coup d'œil</h2></div><div class="progress-number" id="progressPct">0%</div></div><div class="progressbar"><span id="progressBar"></span></div><div class="microgrid"><div class="micro"><b>22</b><small>jours</small></div><div class="micro"><b>21</b><small>nuits</small></div><div class="micro"><b id="chosenCount">0/9</b><small>hébergements</small></div></div></div>
+  <div class="panel next"><div><span class="kicker">Prochaine étape</span><h3 id="nextTitle">Yogyakarta</h3><p id="nextText">9 déc. · Prambanan · découverte de Jogja</p></div><button onclick="openDay(1)">Ouvrir la fiche →</button></div>
+ </div>
+</section>
+<section class="wrap section" id="itineraire">
+ <div class="section-head"><div><span class="kicker">22 jours · 3 semaines</span><h2>L'itinéraire</h2><p>Fais défiler les jours, puis ouvre une fiche quand tu veux entrer dans le détail.</p></div></div>
+ <div class="timeline" id="timeline"></div><div class="days" id="days"></div>
+</section>
+<section class="wrap section" id="reserver">
+ <div class="section-head"><div><span class="kicker">Réserver sans se perdre</span><h2>Les étapes & hébergements</h2><p>Un choix par étape. Les sélections restent enregistrées sur ton téléphone.</p></div></div>
+ <div class="stage-list" id="stages"></div>
+</section>
+<section class="wrap section" id="cartes">
+ <div class="section-head"><div><span class="kicker">Navigation</span><h2>La route en un regard</h2><p>Carte indicative du parcours. Pour conduire, utiliser la navigation du téléphone.</p></div></div>
+ <div id="map" class="map"></div><div class="mapbar"><span>📍 14 points</span><span>🌋 Java + Bali</span><span>🧭 GPS</span><span>🚗 transferts privés</span></div>
+ <div class="maplinks"><a target="_blank" rel="noopener" href="https://www.openstreetmap.org/#map=8/-8.0/113.7">Ouvrir OpenStreetMap ↗</a><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=-8.7482,115.1671&destination=-8.7482,115.1671">Ouvrir Google Maps ↗</a></div>
+</section>
+<section class="wrap section" id="checklist">
+ <div class="section-head"><div><span class="kicker">Avant le départ</span><h2>Check-list essentielle</h2><p>Simple, tactile, sauvegardée localement.</p></div></div>
+ <div class="checkgrid" id="checks"></div>
+</section>
+<section class="wrap section" id="infos"><div class="panel" style="padding:20px"><span class="kicker">Réservation fixe</span><h2 style="font:700 27px Georgia,serif;margin:6px 0">Alasari Hidden Bamboo Retreat</h2><p class="muted">24 → 27 décembre · Seribatu / Bangli · 3 nuits · petit-déjeuner inclus.</p><p>La réservation est conservée avec ce carnet dans le fichier <b>confirmation-alasari.pdf</b>.</p><a class="smallbtn primary" style="display:inline-block;text-decoration:none" href="confirmation-alasari.pdf" target="_blank">Ouvrir la confirmation PDF ↗</a></div></section>
 </main>
-<script>
-const labels={"s0": "J2 · Yogyakarta", "s1": "J3 · Borobudur", "s2": "J4 · Malang / accès Bromo", "s3": "J6–J7 · Ijen / Banyuwangi", "s4": "J10–J11 · Munduk", "s5": "J12–J14 · Sidemen", "s6": "J15–J16 · Batur", "s7": "J17–J19 · Alasari", "s8": "J20–J21 · Ubud"};
-const key="indo2026_booking_choices";let choices=JSON.parse(localStorage.getItem(key)||"{}");
-function pick(id,name){choices[id]=name;localStorage.setItem(key,JSON.stringify(choices));render();}
-function render(){for(const id in labels){const s=document.getElementById("sel-"+id),d=document.getElementById("d-"+id),v=choices[id];s.textContent=v?"✓ "+v:"Aucun choix";s.classList.toggle("active",!!v);d.classList.toggle("done",!!v);}
-document.querySelectorAll(".hotel").forEach(h=>{const b=h.querySelector(".choose");if(!b)return;const n=h.querySelector("b").textContent;const stage=h.closest(".stage").id;b.classList.toggle("chosen",choices[stage]===n);b.textContent=choices[stage]===n?"✓ Choisi":"Choisir";});
-document.getElementById("list").innerHTML=Object.entries(labels).map(([id,l])=>"<div>"+l+" : <b>"+(choices[id]||"—")+"</b></div>").join("");
-}
-function clearAll(){if(confirm("Effacer tous les choix ?")){choices={};localStorage.removeItem(key);render();}}
-render();
-</script>
-<section id="master" style="margin:28px auto;max-width:1100px;padding:0 16px;font-family:system-ui,-apple-system,Segoe UI,sans-serif">
-  <div style="background:linear-gradient(135deg,#12372a,#285943);color:white;border-radius:24px;padding:24px;margin-bottom:18px">
-    <div style="font-size:13px;opacity:.8;letter-spacing:.08em;text-transform:uppercase">Carnet maître · Indonésie</div>
-    <h2 style="font-size:32px;line-height:1.05;margin:8px 0">Java sauvage → Bali nature</h2>
-    <p style="margin:0;opacity:.9">8 → 29 décembre 2026 · 22 jours · 21 nuits · 2 voyageurs</p>
-  </div>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:20px">
-    <div style="padding:15px;border-radius:16px;background:#f4f7f4"><b>✈️ Vols internationaux</b><br>NOU → DPS le 8/12 · retour le 29/12 à 21h</div>
-    <div style="padding:15px;border-radius:16px;background:#f4f7f4"><b>🏡 Hébergement</b><br>Choix étape par étape dans le sélecteur Booking ci-dessous</div>
-    <div style="padding:15px;border-radius:16px;background:#f4f7f4"><b>🌋 Fil rouge</b><br>Temples · volcans · jungle · villages · randonnée</div>
-    <div style="padding:15px;border-radius:16px;background:#f4f7f4"><b>🎋 Réservé</b><br>Alasari Hidden Bamboo Retreat · 24–27/12</div>
-  </div>
-
-  <h3>🗺️ Itinéraire maître</h3>
-  <div style="overflow:auto;border-radius:18px;border:1px solid #e3e8e4">
-  <table style="border-collapse:collapse;width:100%;min-width:780px;background:white">
-    <thead><tr style="background:#edf3ee">
-      <th style="padding:11px;text-align:left">Jour</th><th style="padding:11px;text-align:left">Date</th>
-      <th style="padding:11px;text-align:left">Étape</th><th style="padding:11px;text-align:left">Programme</th>
-      <th style="padding:11px;text-align:left">Nuit</th><th style="padding:11px;text-align:left">À sécuriser</th>
-    </tr></thead>
-    <tbody>
-      <tr><td>J1</td><td>8 déc.</td><td>Denpasar</td><td>Arrivée 19h45 · transfert court · repos</td><td>DPS</td><td>Hôtel proche aéroport</td></tr>
-      <tr><td>J2</td><td>9 déc.</td><td>Yogyakarta</td><td>Vol DPS→YIA · Prambanan · découverte Jogja</td><td>Yogyakarta</td><td>✈️ Vol DPS→YIA</td></tr>
-      <tr><td>J3</td><td>10 déc.</td><td>Borobudur</td><td>Lever du soleil · Pawon/Mendut · villages</td><td>Borobudur</td><td>🎟️ Sunrise Borobudur</td></tr>
-      <tr><td>J4</td><td>11 déc.</td><td>Malang</td><td>Retour Jogja · train vers Malang · transfert Bromo</td><td>Accès Bromo</td><td>🚆 KAI</td></tr>
-      <tr><td>J5</td><td>12 déc.</td><td>Bromo</td><td>4×4 · caldeira · cratère · marge météo</td><td>Bromo</td><td>🚙 4×4 + guide local</td></tr>
-      <tr><td>J6</td><td>13 déc.</td><td>Ijen</td><td>Route Bromo→Banyuwangi/Licin · repos</td><td>Ijen/Banyuwangi</td><td>🚗 Chauffeur privé</td></tr>
-      <tr><td>J7</td><td>14 déc.</td><td>Ijen</td><td>Trek de nuit · lever du jour · lac acide</td><td>Ijen/Banyuwangi</td><td>🥾 Guide + certificat médical à vérifier</td></tr>
-      <tr><td>J8</td><td>15 déc.</td><td>Meru Betiri</td><td>4×4 · Rajegwesi · Green Bay si conditions</td><td>Rajegwesi</td><td>🚙 4×4 + organisation locale</td></tr>
-      <tr><td>J9</td><td>16 déc.</td><td>Sukamade</td><td>Jungle · plage · observation des tortues avec rangers</td><td>Sukamade</td><td>🧭 Ranger / transfert 4×4</td></tr>
-      <tr><td>J10</td><td>17 déc.</td><td>Munduk</td><td>Java→Bali · ferry · arrivée douce</td><td>Munduk</td><td>🚗 Transfert + ferry</td></tr>
-      <tr><td>J11</td><td>18 déc.</td><td>Munduk</td><td>Cascades · plantations · villages</td><td>Munduk</td><td>🥾 Guide optionnel</td></tr>
-      <tr><td>J12</td><td>19 déc.</td><td>Sidemen</td><td>Route montagne · installation · balade</td><td>Sidemen</td><td>🚗 Chauffeur</td></tr>
-      <tr><td>J13</td><td>20 déc.</td><td>Sidemen</td><td>Rizières · villages · temples</td><td>Sidemen</td><td>🌾 Guide local optionnel</td></tr>
-      <tr><td>J14</td><td>21 déc.</td><td>Sidemen</td><td>Journée lente · randonnée ou immersion</td><td>Sidemen</td><td>—</td></tr>
-      <tr><td>J15</td><td>22 déc.</td><td>Batur</td><td>Départ très tôt · Batur · sources chaudes</td><td>Kintamani/Batur</td><td>🌋 Guide + météo</td></tr>
-      <tr><td>J16</td><td>23 déc.</td><td>Batur/Bangli</td><td>Lacs · villages · transition vers jungle</td><td>Bangli</td><td>🚗 Chauffeur</td></tr>
-      <tr><td>J17</td><td>24 déc.</td><td>Alasari</td><td>Arrivée · jungle · installation</td><td>Alasari</td><td>🏡 Réservé</td></tr>
-      <tr><td>J18</td><td>25 déc.</td><td>Alasari</td><td>Journée lente · nature</td><td>Alasari</td><td>—</td></tr>
-      <tr><td>J19</td><td>26 déc.</td><td>Alasari</td><td>Jungle · repos · exploration douce</td><td>Alasari</td><td>—</td></tr>
-      <tr><td>J20</td><td>27 déc.</td><td>Ubud</td><td>Transfert · installation · découverte</td><td>Ubud</td><td>🏨 Hébergement</td></tr>
-      <tr><td>J21</td><td>28 déc.</td><td>Ubud</td><td>Journée libre · culture · massage/temple</td><td>Ubud</td><td>—</td></tr>
-      <tr><td>J22</td><td>29 déc.</td><td>DPS / retour</td><td>Matinée Ubud · transfert anticipé · vol 21h</td><td>✈️</td><td>🚗 Transfert DPS</td></tr>
-    </tbody>
-  </table></div>
-
-  <h3 style="margin-top:28px">💡 Bons plans transversaux</h3>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px">
-    <article style="padding:16px;border-radius:18px;background:#fff8e8"><b>🌧️ Décembre</b><p style="margin:8px 0 0">Prévoir une vraie marge météo sur Bromo/Ijen et garder les activités extérieures modulables.</p></article>
-    <article style="padding:16px;border-radius:18px;background:#eef7ff"><b>🎒 Bagages</b><p style="margin:8px 0 0">Un sac souple léger pour Java sauvage facilite les 4×4 et les hébergements simples.</p></article>
-    <article style="padding:16px;border-radius:18px;background:#f3efff"><b>🚗 Chauffeurs</b><p style="margin:8px 0 0">Regrouper les transferts par blocs réduit les changements de véhicule et sécurise les horaires.</p></article>
-    <article style="padding:16px;border-radius:18px;background:#eef8f0"><b>🌿 Rythme</b><p style="margin:8px 0 0">Conserver les journées lentes à Alasari et à Ubud évite de transformer le voyage en succession de transferts.</p></article>
-  </div>
-
-  <div style="margin-top:24px;padding:18px;border-radius:18px;background:#f7f7f7">
-    <h3 style="margin-top:0">🔗 Vol DPS → YIA · J2</h3>
-    <p>Recherche Google Flights préparée pour le 9 décembre 2026.</p>
-    <a href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTEyLTA5agcIARIDRFBTcgcIARIDWUlBQAFAAUgBcAGCAQsI____________AZgBAg&hl=fr&gl=FR" target="_blank" rel="noopener"
-       style="display:inline-block;padding:11px 15px;border-radius:12px;background:#173b2c;color:white;text-decoration:none">Ouvrir la recherche ✈️</a>
-  </div>
-
-  <div style="margin-top:24px;padding:18px;border-radius:18px;background:#173b2c;color:white">
-    <h3 style="margin-top:0">📌 Priorités de réservation</h3>
-    <ol style="margin-bottom:0">
-      <li>Vol DPS → YIA du 9 décembre.</li>
-      <li>Sunrise Borobudur.</li>
-      <li>Train Yogyakarta → Malang dès ouverture des ventes.</li>
-      <li>4×4 + organisation Bromo.</li>
-      <li>Transfert Bromo → Ijen.</li>
-      <li>Guide / conditions d'accès Ijen.</li>
-      <li>4×4 + rangers Meru Betiri / Sukamade.</li>
-      <li>Transfert Java → Bali.</li>
-      <li>Hébergements Munduk, Sidemen, Batur et Ubud.</li>
-      <li>Transfert Ubud → DPS le 29 décembre.</li>
-    </ol>
-  </div>
-</section>
-
-<style id="app-mobile">
-:root{--ink:#17221c;--green:#173b2c;--soft:#edf3ee;--gold:#d8a84e}
-*{box-sizing:border-box} body{padding-bottom:78px}
-.appbar{position:sticky;top:0;z-index:1000;background:rgba(250,251,249,.94);backdrop-filter:blur(14px);border-bottom:1px solid #e5eae6;padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
-.appbar b{font-size:16px}.appbar small{display:block;color:#66736b}
-.appnav{position:fixed;bottom:0;left:0;right:0;z-index:1100;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-top:1px solid #e1e6e2;display:grid;grid-template-columns:repeat(4,1fr);padding:7px 6px max(7px,env(safe-area-inset-bottom))}
-.appnav button{border:0;background:none;color:#506058;font:inherit;font-size:11px;padding:7px 2px;border-radius:12px}
-.appnav button.active{background:var(--soft);color:var(--green);font-weight:700}
-.appnav span{display:block;font-size:19px;line-height:20px;margin-bottom:2px}
-.heroapp{margin:14px 10px 8px;border-radius:25px;overflow:hidden;background:linear-gradient(135deg,#12372a,#5c7b54);color:white;padding:23px 20px;box-shadow:0 12px 30px #173b2c22}
-.heroapp .eyebrow{text-transform:uppercase;font-size:11px;letter-spacing:.12em;opacity:.8}
-.heroapp h1{font-size:30px;line-height:1.02;margin:7px 0}.heroapp p{margin:7px 0 0;opacity:.9}
-.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:10px}
-.quick button{border:1px solid #e2e8e3;background:#fff;border-radius:17px;padding:14px;text-align:left;box-shadow:0 3px 12px #00000009}
-.quick b{display:block}.quick small{color:#66736b}
-.appsection{display:none}.appsection.active{display:block}
-.daycard{margin:10px;border:1px solid #e3e8e4;border-radius:20px;background:#fff;padding:16px;box-shadow:0 5px 18px #00000008}
-.daycard .date{font-size:12px;color:#6a776f;text-transform:uppercase;letter-spacing:.08em}
-.daycard h3{margin:5px 0;font-size:20px}.pill{display:inline-block;background:var(--soft);color:var(--green);padding:5px 9px;border-radius:999px;font-size:11px;font-weight:700;margin:3px 3px 3px 0}
-.daycard details{margin-top:9px;border-top:1px solid #edf0ee;padding-top:9px}.daycard summary{font-weight:700;cursor:pointer}
-.check{display:flex;gap:10px;align-items:flex-start;padding:12px;border-bottom:1px solid #edf0ee}.check input{width:20px;height:20px;margin-top:1px}
-#master{scroll-margin-top:70px}
-@media(min-width:800px){.appnav{max-width:560px;left:50%;transform:translateX(-50%);border:1px solid #ddd;border-radius:20px 20px 0 0}}
-</style>
-
-<div class="appbar">
-  <div><b>🇮🇩 Indonésie 2026</b><small>Java sauvage → Bali nature</small></div>
-  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="border:0;background:#edf3ee;border-radius:12px;padding:9px">⌂</button>
+<nav class="btm" aria-label="Navigation principale"><button class="navbtn active" data-go="accueil" onclick="go('accueil')"><span>⌂</span>Accueil</button><button class="navbtn" data-go="itineraire" onclick="go('itineraire')"><span>◉</span>Jours</button><button class="navbtn" data-go="reserver" onclick="go('reserver')"><span>⌂</span>Réserver</button><button class="navbtn" data-go="cartes" onclick="go('cartes')"><span>⌖</span>Carte</button><button class="navbtn" data-go="checklist" onclick="go('checklist')"><span>✓</span>Préparer</button></nav>
 </div>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet"><div class="sheethead"><div><span class="kicker" id="modalKicker"></span><h2 id="modalTitle"></h2></div><button class="close" onclick="closeModal()">✕</button></div><div id="modalBody"></div></div></div><div class="toast" id="toast"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+const DAYS=[
+['J1','8 déc.','Denpasar','Arrivée 19h45 · transfert court · repos',['✈️ Arrivée','🏨 Nuit près DPS'],'Hôtel proche aéroport'],
+['J2','9 déc.','Yogyakarta','Vol DPS→YIA · Prambanan · découverte Jogja',['✈️ Vol','🛕 Prambanan'],'Vol DPS→YIA'],
+['J3','10 déc.','Borobudur','Lever du soleil · Pawon/Mendut · villages',['🌅 Sunrise','🛕 Temples'],'Sunrise Borobudur'],
+['J4','11 déc.','Malang / Bromo','Retour Jogja · train vers Malang · transfert Bromo',['🚆 Train','🌋 Bromo'],'Train KAI'],
+['J5','12 déc.','Bromo','4×4 · caldeira · cratère · marge météo',['🌋 4×4','🥾 Cratère'],'4×4 + guide'],
+['J6','13 déc.','Ijen','Route Bromo→Banyuwangi/Licin · repos',['🚗 Route','🌴 Banyuwangi'],'Chauffeur privé'],
+['J7','14 déc.','Ijen','Trek de nuit · lever du jour · lac acide',['🌋 Trek','🌅 Sunrise'],'Guide + conditions d’accès'],
+['J8','15 déc.','Meru Betiri','4×4 · Rajegwesi · Green Bay si conditions',['🌴 Jungle','🏖️ Green Bay'],'4×4 + organisation locale'],
+['J9','16 déc.','Sukamade','Jungle · plage · observation des tortues avec rangers',['🐢 Tortues','🌴 Jungle'],'Ranger / 4×4'],
+['J10','17 déc.','Munduk','Java→Bali · ferry · arrivée douce',['⛴️ Ferry','🌿 Munduk'],'Transfert + ferry'],
+['J11','18 déc.','Munduk','Cascades · plantations · villages',['💧 Cascades','☕ Plantations'],'Guide optionnel'],
+['J12','19 déc.','Sidemen','Route montagne · installation · balade',['🌾 Rizières','🚗 Route'],'Chauffeur'],
+['J13','20 déc.','Sidemen','Rizières · villages · temples',['🌾 Rizières','🛕 Temples'],'Guide local optionnel'],
+['J14','21 déc.','Sidemen','Journée lente · randonnée ou immersion',['🥾 Randonnée','🌿 Slow day'],'—'],
+['J15','22 déc.','Batur','Départ très tôt · Batur · sources chaudes',['🌋 Batur','♨️ Sources'],'Guide + météo'],
+['J16','23 déc.','Batur / Bangli','Lacs · villages · transition vers jungle',['🏞️ Lacs','🌿 Villages'],'Chauffeur'],
+['J17','24 déc.','Alasari','Arrivée · jungle · installation',['🎋 Bamboo','🌿 Jungle'],'Réservé'],
+['J18','25 déc.','Alasari','Journée lente · nature',['🌿 Nature','🧘 Slow day'],'—'],
+['J19','26 déc.','Alasari','Jungle · repos · exploration douce',['🌴 Jungle','📖 Repos'],'—'],
+['J20','27 déc.','Ubud','Transfert · installation · découverte',['🌿 Ubud','🛕 Culture'],'Hébergement'],
+['J21','28 déc.','Ubud','Journée libre · culture · temple / massage',['🛕 Temple','💆 Massage'],'—'],
+['J22','29 déc.','DPS / retour','Matinée Ubud · transfert anticipé · vol 21h',['✈️ Retour','⏱️ Marge'],'Transfert DPS']
+];
+const STAGES=[
+{id:'s0',title:'Yogyakarta',image:'https://images.unsplash.com/photo-1516690561799-46d61f9137d3?auto=format&fit=crop&w=1400&q=85',dates:'9 → 10 déc. · 1 nuit',icon:'🛕',tip:'Prawirotaman est plus local et agréable le soir ; Malioboro est plus central et animé. Un chauffeur à la journée simplifie Prambanan puis les déplacements autour de Jogja.',hotels:[['Rajaklana Resort and Spa','4,251 XPF','9.2/10 · 4★','https://www.booking.com/hotel/id/rajaklana-resort-villa-amp-spa.html?aid=2438770&checkin=2026-12-09&checkout=2026-12-10&no_rooms=1&group_adults=2&selected_currency=XPF'],['Greenhost Boutique Hotel Prawirotaman','4,635 XPF','8.8/10 · 4★','https://www.booking.com/hotel/id/greenhost-boutique.html?aid=2438770&checkin=2026-12-09&checkout=2026-12-10&no_rooms=1&group_adults=2&selected_currency=XPF'],['Gallery Prawirotaman Hotel','4,477 XPF','8.6/10 · 4★','https://www.booking.com/hotel/id/gallery-prawirotaman.html?aid=2438770&checkin=2026-12-09&checkout=2026-12-10&no_rooms=1&group_adults=2&selected_currency=XPF'],['Aveta Hotel Malioboro','4,992 XPF','8.3/10 · 4★','https://www.booking.com/hotel/id/aveta-yogyakarta.html?aid=2438770&checkin=2026-12-09&checkout=2026-12-10&no_rooms=1&group_adults=2&selected_currency=XPF'],['Meliá Purosani Yogyakarta','7,861 XPF','8.8/10 · 5★','https://www.booking.com/hotel/id/melia-purosani.html?aid=2438770&checkin=2026-12-09&checkout=2026-12-10&no_rooms=1&group_adults=2&selected_currency=XPF']]},
+{id:'s1',title:'Borobudur',image:'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1400&q=85',dates:'10 → 11 déc. · 1 nuit',icon:'🌅',tip:'Dormir près de Borobudur évite une longue route avant le lever du soleil. Après le temple, privilégier villages, vélo ou balade tranquille. Décembre est humide : garder de la souplesse pour la météo.',hotels:[['Nalendro Villa Borobudur','2,410 XPF','9.4/10 · 3★','https://www.booking.com/hotel/id/nalendro-villa-borobudur.html?aid=2438770&checkin=2026-12-10&checkout=2026-12-11&no_rooms=1&group_adults=2&selected_currency=XPF'],["Puunee Wild River Villa's Borobudur",'5,614 XPF','9.3/10 · 4★','https://www.booking.com/hotel/id/puunee-guest-house-amp-restaurant.html?aid=2438770&checkin=2026-12-10&checkout=2026-12-11&no_rooms=1&group_adults=2&selected_currency=XPF'],['Plataran Heritage Borobudur Hotel','14,062 XPF','9.1/10 · 5★','https://www.booking.com/hotel/id/plataran-heritage-borobudur.html?aid=2438770&checkin=2026-12-10&checkout=2026-12-11&no_rooms=1&group_adults=2&selected_currency=XPF'],['The Amrta Borobudur','3,888 XPF','8.3/10 · 4★','https://www.booking.com/hotel/id/amrta-guest-house.html?aid=2438770&checkin=2026-12-10&checkout=2026-12-11&no_rooms=1&group_adults=2&selected_currency=XPF'],['Lotus 2 Guest House','2,101 XPF','8.2/10 · 1★','https://www.booking.com/hotel/id/lotus-2-homestay.html?aid=2438770&checkin=2026-12-10&checkout=2026-12-11&no_rooms=1&group_adults=2&selected_currency=XPF']]},
+{id:'s2',title:'Malang / accès Bromo',image:'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1400&q=85',dates:'11 → 12 déc. · 1 nuit',icon:'🚆',tip:'Réserver le train KAI dès l’ouverture des ventes. Préparer un petit sac pour Bromo afin d’éviter de fouiller les gros bagages. Pour le lever du soleil, dormir au plus près de l’accès Bromo est plus pratique que dormir en centre-ville.',hotels:[['Hotel Tugu Malang','8,412 XPF','9.4/10 · 5★','https://www.booking.com/hotel/id/tugu-malang.html?aid=2438770&checkin=2026-12-11&checkout=2026-12-12&no_rooms=1&group_adults=2&selected_currency=XPF'],['Ijen Suites Resort & Convention','4,477 XPF','8.2/10 · 4★','https://www.booking.com/hotel/id/ijen-suites-resort-amp-convention.html?aid=2438770&checkin=2026-12-11&checkout=2026-12-12&no_rooms=1&group_adults=2&selected_currency=XPF'],['The Grand Palace Hotel Malang','3,213 XPF','8.0/10 · 3★','https://www.booking.com/hotel/id/the-grand-palace-malang.html?aid=2438770&checkin=2026-12-11&checkout=2026-12-12&no_rooms=1&group_adults=2&selected_currency=XPF'],['Hotel Trio Indah 2','3,247 XPF','7.5/10 · 2★','https://www.booking.com/hotel/id/trio-indah-2.html?aid=2438770&checkin=2026-12-11&checkout=2026-12-12&no_rooms=1&group_adults=2&selected_currency=XPF']]},
+{id:'s3',title:'Banyuwangi / Ijen',image:'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1400&q=85',dates:'13 → 15 déc. · 2 nuits',icon:'🌋',tip:'Un même chauffeur/coordinateur pour Bromo → Ijen simplifie la logistique. La veille du trek : vêtements chauds, chaussures adhérentes, lampe frontale et eau. Vérifier les conditions d’accès juste avant.',hotels:[['Didu\'s Homestay Bed & Breakfast','4,208 XPF','9.3/10 · 2★','https://www.booking.com/hotel/id/didu-39-s-homestay-bed-amp-breakfast.html?aid=2438770&checkin=2026-12-13&checkout=2026-12-15&no_rooms=1&group_adults=2&selected_currency=XPF'],['Ketapang Indah Hotel','6,826 XPF','8.8/10 · 4★','https://www.booking.com/hotel/id/ketapang-indah.html?aid=2438770&checkin=2026-12-13&checkout=2026-12-15&no_rooms=1&group_adults=2&selected_currency=XPF'],['Dialoog Banyuwangi','26,903 XPF','9.2/10 · 4★','https://www.booking.com/hotel/id/dialoog-banyuwangi-banyuwangi.html?aid=2438770&checkin=2026-12-13&checkout=2026-12-15&no_rooms=1&group_adults=2&selected_currency=XPF'],['Hotel Blambangan','6,134 XPF','7.7/10 · 3★','https://www.booking.com/hotel/id/blambangan-banyuwangi.html?aid=2438770&checkin=2026-12-13&checkout=2026-12-15&no_rooms=1&group_adults=2&selected_currency=XPF'],['Banana Homestay','2,633 XPF','note non disponible','https://www.booking.com/hotel/id/banana-homestay-kabupaten-banyuwangi.html?aid=2438770&checkin=2026-12-13&checkout=2026-12-15&no_rooms=1&group_adults=2&selected_currency=XPF']]},
+{id:'s4',title:'Munduk',image:'https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?auto=format&fit=crop&w=1400&q=85',dates:'17 → 19 déc. · 2 nuits',icon:'🌿',tip:'Après le ferry, garder une soirée très légère. À Munduk : cascades, plantations et villages. Pour les visites éloignées, préférer un chauffeur local ; garder la marche pour les villages.',hotels:[['Made Oka Homestay and Warung','4,143 XPF','8.7/10 · 4★','https://www.booking.com/hotel/id/made-oka-homestay-amp-warung.html?aid=2438770&checkin=2026-12-17&checkout=2026-12-19&no_rooms=1&group_adults=2&selected_currency=XPF'],['Nadya Homestay','6,763 XPF','8.6/10 · 2★','https://www.booking.com/hotel/id/nadya-homestay.html?aid=2438770&checkin=2026-12-17&checkout=2026-12-19&no_rooms=1&group_adults=2&selected_currency=XPF'],['Munduk Heaven Luxury Villas','15,143 XPF','8.7/10 · 4★','https://www.booking.com/hotel/id/munduk-heaven.html?aid=2438770&checkin=2026-12-17&checkout=2026-12-19&no_rooms=1&group_adults=2&selected_currency=XPF'],['Giriwood Hotel & Villa','17,683 XPF','9.3/10 · 4★','https://www.booking.com/hotel/id/giriwood-amp-villa.html?aid=2438770&checkin=2026-12-17&checkout=2026-12-19&no_rooms=1&group_adults=2&selected_currency=XPF'],['Munduk Moding Plantation Nature Resort','36,508 XPF','9.6/10 · 5★','https://www.booking.com/hotel/id/munduk-moding-plantation-nature-resort.html?aid=2438770&checkin=2026-12-17&checkout=2026-12-19&no_rooms=1&group_adults=2&selected_currency=XPF']]},
+{id:'s5',title:'Sidemen',image:'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1400&q=85',dates:'19 → 22 déc. · 3 nuits',icon:'🌾',tip:'Les balades dans les rizières donnent le meilleur accès au paysage. Un guide local est utile pour les sentiers et les villages ; certaines portions peuvent être glissantes.',hotels:[['Abian Ayu Villa','18,281 XPF','9.3/10 · 4★','https://www.booking.com/hotel/id/villa-abian-ayu.html?aid=2438770&checkin=2026-12-19&checkout=2026-12-22&no_rooms=1&group_adults=2&selected_currency=XPF'],['Devani Resort Sidemen','21,805 XPF','9.1/10 · 4★','https://www.booking.com/hotel/id/devani-resort-sidemen.html?aid=2438770&checkin=2026-12-19&checkout=2026-12-22&no_rooms=1&group_adults=2&selected_currency=XPF'],['Patal Kikian Villa','42,826 XPF','9.5/10 · 3★','https://www.booking.com/hotel/id/patal-kikian-sidemen.html?aid=2438770&checkin=2026-12-19&checkout=2026-12-22&no_rooms=1&group_adults=2&selected_currency=XPF'],['Wapa di Ume Sidemen','51,945 XPF','9.5/10 · 5★','https://www.booking.com/hotel/id/wapa-di-ume-sidemen.html?aid=2438770&checkin=2026-12-19&checkout=2026-12-22&no_rooms=1&group_adults=2&selected_currency=XPF'],['Kankhara Villas Sidemen','71,102 XPF','9.6/10 · 4★','https://www.booking.com/hotel/id/kankhara-villas-sidemen.html?aid=2438770&checkin=2026-12-19&checkout=2026-12-22&no_rooms=1&group_adults=2&selected_currency=XPF']]},
+{id:'s6',title:'Kintamani / Batur',image:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1400&q=85',dates:'22 → 24 déc. · 2 nuits',icon:'♨️',tip:'Choisir un logement pratique pour le départ très tôt et/ou les sources chaudes. Garder le programme volcanique flexible selon météo et conditions d’accès.',hotels:[['The Lava Bali Villa and Hot Spring','12,324 XPF','9.0/10 · 4★','https://www.booking.com/hotel/id/the-lava-bali-kabupaten-bangli1.html?aid=2438770&checkin=2026-12-22&checkout=2026-12-24&no_rooms=1&group_adults=2&selected_currency=XPF'],['Tira Vilagna Suites & Spa','17,237 XPF','9.0/10 · 4★','https://www.booking.com/hotel/id/tira-vilagna-suites-amp-spa-kintamani-bali.html?aid=2438770&checkin=2026-12-22&checkout=2026-12-24&no_rooms=1&group_adults=2&selected_currency=XPF'],['Tegal Sari Cabin Kintamani','9,691 XPF','8.7/10 · 3★','https://www.booking.com/hotel/id/tegal-sari-cabin-kintamani.html?aid=2438770&checkin=2026-12-22&checkout=2026-12-24&no_rooms=1&group_adults=2&selected_currency=XPF'],['Pondok Devana Kintamani','9,691 XPF','8.4/10 · 3★','https://www.booking.com/hotel/id/pondok-devana-kintamani.html?aid=2438770&checkin=2026-12-22&checkout=2026-12-24&no_rooms=1&group_adults=2&selected_currency=XPF'],['Black Wood Cabin','16,011 XPF','8.1/10 · 3★','https://www.booking.com/hotel/id/black-wood-cabin.html?aid=2438770&checkin=2026-12-22&checkout=2026-12-24&no_rooms=1&group_adults=2&selected_currency=XPF']]},
+{id:'s7',title:'Alasari · Seribatu / Bangli',image:'https://images.unsplash.com/photo-1516690561799-46d61f9137d3?auto=format&fit=crop&w=1400&q=85',dates:'24 → 27 déc. · 3 nuits',icon:'🎋',tip:'Réservation confirmée. C’est la parenthèse jungle du voyage : garder un rythme lent, nature, repos et exploration douce.',reserved:true,hotels:[['Alasari Hidden Bamboo Retreat in the Jungle','Réservation confirmée','24–27 déc. · 3 nuits','']]},
+{id:'s8',title:'Ubud',image:'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1400&q=85',dates:'27 → 29 déc. · 2 nuits',icon:'🌿',tip:'Après Alasari, conserver une journée lente. Le 29 décembre, ne pas serrer le transfert vers DPS : le vol est à 21h.',hotels:[['Arcana Ubud','10,534 XPF','9.8/10 · 4★','https://www.booking.com/hotel/id/arcana-ubud.html?aid=2438770&checkin=2026-12-27&checkout=2026-12-29&no_rooms=1&group_adults=2&selected_currency=XPF'],['Jati Cottage','13,964 XPF','9.0/10 · 3★','https://www.booking.com/hotel/id/jati-cottage.html?aid=2438770&checkin=2026-12-27&checkout=2026-12-29&no_rooms=1&group_adults=2&selected_currency=XPF'],['Purana Boutique Resort','17,345 XPF','9.5/10 · 5★','https://www.booking.com/hotel/id/purana-boutique-resort.html?aid=2438770&checkin=2026-12-27&checkout=2026-12-29&no_rooms=1&group_adults=2&selected_currency=XPF'],['SenS Hotel and Spa','12,162 XPF','8.4/10 · 4★','https://www.booking.com/hotel/id/sens-and-spa-conference-ubud-town-centre.html?aid=2438770&checkin=2026-12-27&checkout=2026-12-29&no_rooms=1&group_adults=2&selected_currency=XPF'],['Ulun Ubud Resort','21,456 XPF','9.0/10 · 4★','https://www.booking.com/hotel/id/ulun-ubud-resort.html?aid=2438770&checkin=2026-12-27&checkout=2026-12-29&no_rooms=1&group_adults=2&selected_currency=XPF']]}];
+const POINTS=[['DPS','Denpasar / DPS',-8.7482,115.1671],['YIA','Yogyakarta',-7.7956,110.3695],['PRA','Prambanan',-7.7522,110.4917],['BOR','Borobudur',-7.608,110.204],['MLG','Malang',-7.9839,112.6214],['BRM','Bromo',-7.9425,112.953],['IJE','Ijen',-8.058,114.242],['RAJ','Rajegwesi',-8.565,113.907],['SUK','Sukamade',-8.55,113.96],['MUN','Munduk',-8.266,115.077],['SID','Sidemen',-8.484,115.446],['BAT','Batur',-8.2397,115.375],['ALA','Alasari',-8.39468,115.34068],['UBD','Ubud',-8.5069,115.2625]];
+const STAGEPOINTS=[['DPS','YIA','PRA'],['YIA','BOR'],['BOR','MLG','BRM'],['BRM','IJE'],['IJE','RAJ','SUK'],['SUK','MUN'],['MUN','SID'],['SID','BAT'],['BAT','ALA'],['ALA','UBD','DPS']];
+const CHECKS=[['passport','Passeports + copies numériques'],['insurance','Assurance voyage'],['cash','Un peu de cash / carte secondaire'],['phone','eSIM / données mobiles'],['shoes','Chaussures adhérentes'],['lamp','Lampe frontale pour Ijen'],['warm','Couche chaude Bromo / Ijen / Batur'],['rain','Protection pluie / sac étanche'],['mosquito','Anti-moustique'],['power','Adaptateur + batterie externe'],['health','Médicaments personnels'],['bags','Petit sac pour les treks']];
+const choiceKey='indo2026_premium_choices';const checkKey='indo2026_premium_checks';let choices=JSON.parse(localStorage.getItem(choiceKey)||'{}');let checks=JSON.parse(localStorage.getItem(checkKey)||'{}');
+function save(){localStorage.setItem(choiceKey,JSON.stringify(choices));updateProgress()}
+function choose(stage,name){choices[stage]=name;save();renderStages();toast('✓ '+name+' enregistré');}
+function resetChoices(){if(confirm('Réinitialiser tous les choix d’hébergement ?')){choices={};save();renderStages();toast('Sélections réinitialisées')}}
+function updateProgress(){let n=Object.keys(choices).length;document.getElementById('chosenCount').textContent=n+'/9';let pct=Math.round(n/9*100);document.getElementById('progressPct').textContent=pct+'%';document.getElementById('progressBar').style.width=pct+'%'}
+function go(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.go===id));}
+function renderTimeline(){document.getElementById('timeline').innerHTML=DAYS.map((d,i)=>`<button class="daydot ${i===0?'active':''}" onclick="openDay(${i})"><b>${d[0]}</b><small>${d[1]}</small></button>`).join('')}
+function renderDays(){document.getElementById('days').innerHTML=DAYS.map((d,i)=>`<article class="panel day"><div class="daytop"><span class="datepill">${d[0]} · ${d[1]}</span><span class="muted">${i===0?'Départ':i===21?'Retour':'Étape'}</span></div><h3>${d[2]}</h3><p>${d[3]}</p><div class="tags">${d[4].map(x=>`<span class="tag">${x}</span>`).join('')}</div><div class="day-actions"><button class="smallbtn primary" onclick="openDay(${i})">Ouvrir la fiche</button><button class="smallbtn" onclick="focusStage(${Math.min(8,Math.max(0,Math.floor(i/2)))} )">Voir l'hébergement</button></div></article>`).join('')}
+function openDay(i){const d=DAYS[i];document.getElementById('modalKicker').textContent=d[0]+' · '+d[1];document.getElementById('modalTitle').textContent=d[2];document.getElementById('modalBody').innerHTML=`<p>${d[3]}</p><div class="route">📌 À sécuriser : ${d[5]}</div><ul>${d[4].map(x=>`<li>${x}</li>`).join('')}</ul>${i===0?'<p><b>Réflexe :</b> arrivée tardive, privilégier une nuit simple et pratique près de DPS.</p>':''}${i===4?'<p><b>Réflexe :</b> garder une marge météo ; le lever du soleil à Bromo dépend des conditions.</p>':''}${i===6?'<p><b>Réflexe :</b> trek nocturne : vêtements chauds, chaussures adaptées et vérification des conditions d’accès.</p>':''}${i===8?'<p><b>Réflexe :</b> organiser les 4×4 et les rangers en amont.</p>':''}${i===16?'<p><b>Réflexe :</b> Alasari est réservé du 24 au 27 décembre : profiter d’un rythme lent dans la jungle.</p>':''}${i===21?'<p><b>Réflexe :</b> conserver une large marge avant le vol de 21h.</p>':''}`;document.getElementById('modal').classList.add('show');}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function renderStages(){document.getElementById('stages').innerHTML=STAGES.map((s,i)=>{let selected=choices[s.id]||'';return `<article class="panel stage-card" id="stage-${s.id}"><div class="stage-photo" style="background-image:url('${s.image||''}')"><span class="stage-photo-label">${s.title}</span></div><div class="stage-summary" onclick="toggleStage('${s.id}')"><div class="stage-num">${s.icon}</div><div class="stage-main"><b>${s.title}</b><small>${s.dates}</small></div><div class="stage-right">${s.reserved?'<strong>✓ Réservé</strong>':selected?'<strong>✓ Choisi</strong>':'<strong>'+s.hotels.length+' options</strong>'}<span>${selected||'À décider'}</span></div><span class="chev">⌄</span></div><div class="stage-body"><div class="tipbox"><b>💡 Le bon réflexe</b><br>${s.tip}</div>${s.reserved?'':`<input class="hotel-search" placeholder="Rechercher un hébergement…" oninput="filterHotels('${s.id}',this.value)">`}<div id="hotels-${s.id}">${renderHotels(s,selected)}</div></div></article>`}).join('')}
+function renderHotels(s,selected){return s.hotels.map((h,j)=>`<div class="hotel" data-name="${h[0].toLowerCase()}"><div><div class="hotel-name">${h[0]}</div><div class="hotel-meta">${h[1]} ${h[2]&&h[2].includes('/')?'<span class="rating">★ '+h[2]+'</span>':'· '+h[2]}</div></div><div class="hotel-actions">${s.reserved?'<span class="reserved">RÉSERVÉ</span>':`<button class="choose ${selected===h[0]?'selected':''}" onclick="choose('${s.id}',${JSON.stringify(h[0])})">${selected===h[0]?'✓ Choisi':'Choisir'}</button><a class="book" href="${h[3]}" target="_blank" rel="noopener">Booking ↗</a>`}</div></div>`).join('')}
+function toggleStage(id){document.getElementById('stage-'+id).classList.toggle('open')}
+function filterHotels(id,q){document.querySelectorAll('#hotels-'+id+' .hotel').forEach(x=>x.style.display=x.dataset.name.includes(q.toLowerCase())?'grid':'none')}
+function focusStage(i){go('reserver');setTimeout(()=>{const s=STAGES[i];if(s){document.getElementById('stage-'+s.id).classList.add('open');document.getElementById('stage-'+s.id).scrollIntoView({behavior:'smooth',block:'center'})}},350)}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove('show'),1800)}
+function renderChecks(){document.getElementById('checks').innerHTML=CHECKS.map(([id,label])=>`<label class="panel check"><input type="checkbox" ${checks[id]?'checked':''} onchange="checks['${id}']=this.checked;localStorage.setItem(checkKey,JSON.stringify(checks));updateCheckCount()"><span><b>${label}</b><small>À cocher quand c’est prêt</small></span></label>`).join('');updateCheckCount()}
+function updateCheckCount(){let n=Object.values(checks).filter(Boolean).length;document.querySelector('#checks')?.previousElementSibling?.querySelector('p')?.replaceChildren(document.createTextNode(n+'/'+CHECKS.length+' éléments préparés · sauvegarde automatique sur ce téléphone.'))}
+renderTimeline();renderDays();renderStages();renderChecks();updateProgress();
+let map=L.map('map',{scrollWheelZoom:false,zoomControl:false}).setView([-8.15,114.0],7);L.control.zoom({position:'bottomright'}).addTo(map);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);let bounds=[];POINTS.forEach(p=>{let m=L.marker([p[2],p[3]]).addTo(map).bindPopup('<b>'+p[1]+'</b>');bounds.push([p[2],p[3]])});L.polyline(POINTS.map(p=>[p[2],p[3]]),{weight:4,dashArray:'8 8',color:'#2d7456'}).addTo(map);map.fitBounds(bounds,{padding:[25,25]});
+</script>
 
-<section id="accueil" class="appsection active">
-  <div class="heroapp">
-    <div class="eyebrow">8 → 29 décembre 2026 · 2 voyageurs</div>
-    <h1>Java sauvage<br>→ Bali nature</h1>
-    <p>22 jours · volcans · jungle · temples · villages · randonnée</p>
-  </div>
-  <div class="quick">
-    <button onclick="showTab('itineraire')">🗓️ <b>Itinéraire</b><small>J1 → J22</small></button>
-    <button onclick="showTab('reserver')">📌 <b>À réserver</b><small>Les priorités</small></button>
-    <button onclick="goMaster()">🏡 <b>Booking</b><small>Choisir les nuits</small></button>
-    <button onclick="showTab('checklist')">🎒 <b>Checklist</b><small>Préparer le départ</small></button>
-  </div>
-  <div class="daycard">
-    <div class="date">Prochaine étape</div>
-    <h3>J1 · 8 décembre</h3>
-    <p>Arrivée à Denpasar à 19h45. Nuit près de l'aéroport pour éviter un transfert nocturne vers Java.</p>
-    <span class="pill">✈️ Arrivée DPS</span><span class="pill">😴 Nuit courte</span>
-  </div>
-  <div class="daycard">
-    <b>🌦️ À garder en tête</b>
-    <p>Décembre est la période humide : on conserve volontairement de la souplesse autour de Bromo, Ijen et des activités nature.</p>
-  </div>
-</section>
-
-<section id="itineraire" class="appsection">
-  <div class="heroapp"><div class="eyebrow">22 jours</div><h1>Le voyage, jour par jour</h1><p>Appuie sur une journée pour afficher le détail.</p></div>
-  <div id="daycards"></div>
-</section>
-
-<section id="reserver" class="appsection">
-  <div class="heroapp"><div class="eyebrow">Avant le départ</div><h1>À réserver</h1><p>On sécurise d'abord les éléments qui conditionnent la suite du parcours.</p></div>
-  <div class="daycard">
-    <div class="check"><input type="checkbox"><div><b>Vol DPS → YIA · 9 décembre</b><br><small>Recherche Google Flights déjà préparée dans le carnet.</small></div></div>
-    <div class="check"><input type="checkbox"><div><b>Sunrise Borobudur</b><br><small>Créneau et capacité à vérifier.</small></div></div>
-    <div class="check"><input type="checkbox"><div><b>Train Yogyakarta → Malang</b><br><small>À acheter dès ouverture des ventes.</small></div></div>
-    <div class="check"><input type="checkbox"><div><b>Bromo · 4×4 + organisation locale</b></div></div>
-    <div class="check"><input type="checkbox"><div><b>Bromo → Ijen · chauffeur privé</b></div></div>
-    <div class="check"><input type="checkbox"><div><b>Ijen · guide + conditions d'accès</b></div></div>
-    <div class="check"><input type="checkbox"><div><b>Meru Betiri / Sukamade · 4×4 + rangers</b></div></div>
-    <div class="check"><input type="checkbox"><div><b>Transfert Java → Bali</b></div></div>
-    <div class="check"><input type="checkbox"><div><b>Hébergements Munduk / Sidemen / Batur / Ubud</b></div></div>
-    <div class="check"><input type="checkbox"><div><b>Ubud → DPS · 29 décembre</b><br><small>Prévoir une large marge avant le vol de 21h.</small></div></div>
-  </div>
-</section>
-
-<section id="checklist" class="appsection">
-  <div class="heroapp"><div class="eyebrow">Préparation</div><h1>Checklist voyage</h1><p>Quelques éléments pratiques adaptés au parcours.</p></div>
-  <div class="daycard">
-    <div class="check"><input type="checkbox"><div><b>Chaussures de randonnée</b><br><small>Bromo, Ijen, Meru Betiri et Bali.</small></div></div>
-    <div class="check"><input type="checkbox"><div><b>Vêtement chaud + pluie</b><br><small>Indispensable pour les départs volcaniques et la saison humide.</small></div></div>
-    <div class="check"><input type="checkbox"><div><b>Lampe frontale</b><br><small>Pour le trek nocturne d'Ijen.</small></div></div>
-    <div class="check"><input type="checkbox"><div><b>Petit sac souple</b><br><small>Plus pratique pour les 4×4 et les hébergements nature.</small></div></div>
-    <div class="check"><input type="checkbox"><div><b>Copies des réservations</b><br><small>Vols, hébergements, transferts et activités.</small></div></div>
-  </div>
-</section>
-
-
-<style id="terrain-ui">
-.terrain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:10px}
-.terrain-card{background:#fff;border:1px solid #e3e8e4;border-radius:20px;padding:16px;box-shadow:0 5px 18px #00000008}
-.terrain-card h3{margin:4px 0 8px;font-size:20px}.terrain-card small{color:#65736b}
-.terrain-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.terrain-actions button,.terrain-actions a{border:0;border-radius:12px;padding:10px 12px;background:#edf3ee;color:#173b2c;text-decoration:none;font-weight:700}
-.terrain-map{height:220px;border-radius:18px;background:linear-gradient(135deg,#dcebdc,#b8d2bd);display:flex;align-items:center;justify-content:center;color:#31563d;font-weight:700;margin:10px 0}
-.timeline{position:relative;margin:12px 10px}.timeline:before{content:"";position:absolute;left:12px;top:0;bottom:0;width:2px;background:#dfe7e1}
-.titem{position:relative;padding:0 0 14px 38px}.dot{position:absolute;left:5px;top:3px;width:16px;height:16px;border-radius:50%;background:#173b2c}
-.route{font-size:13px;color:#59675f}.note{background:#fff8e8;border-radius:14px;padding:12px;margin-top:10px}
-@media(max-width:600px){.terrain-grid{grid-template-columns:1fr}.terrain-map{height:190px}}
+<style>
+.days-pro-section{padding:28px 16px 110px;background:linear-gradient(180deg,#f8f6f0,#f1eee6)}
+.section-head-pro{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:18px}
+.section-head-pro h2{font-family:Georgia,serif;font-size:30px;line-height:1.05;margin:6px 0}
+.section-head-pro p{color:#667066;line-height:1.45;margin:0;max-width:480px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.16em;color:#7a6b4d}
+.day-progress{background:#183d32;color:white;border-radius:18px;padding:12px 14px;text-align:center;min-width:58px;box-shadow:0 10px 25px #173a3222}
+.day-progress strong{display:block;font-size:22px}.day-progress span{font-size:10px;opacity:.7}
+.day-search-wrap{background:white;border:1px solid #e5e0d4;border-radius:18px;padding:12px 15px;display:flex;gap:10px;align-items:center;margin-bottom:18px;position:sticky;top:8px;z-index:8;box-shadow:0 8px 25px #0000000a}
+.day-search-wrap span{font-size:22px;color:#7d806f}.day-search-wrap input{border:0;outline:0;background:transparent;width:100%;font-size:15px}
+.days-pro-list{display:grid;gap:16px;max-width:850px;margin:auto}
+.day-card-pro{background:#fff;border-radius:25px;overflow:hidden;box-shadow:0 12px 35px #1b2c2410;border:1px solid #ebe7dd;transition:.25s}
+.day-card-pro:hover{transform:translateY(-2px);box-shadow:0 18px 45px #1b2c2418}
+.day-cover{height:190px;position:relative;background:linear-gradient(135deg,#345b4d,#9d8d65);overflow:hidden}
+.day-cover-gradient{position:absolute;inset:0;background:linear-gradient(180deg,#00000010,#00000090)}
+.day-icon{position:absolute;right:18px;top:18px;width:48px;height:48px;border-radius:50%;background:#ffffffd9;display:grid;place-items:center;font-size:24px}
+.day-cover-text{position:absolute;left:20px;right:70px;bottom:20px;color:white}
+.day-kicker{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.82}
+.day-cover h3{font-family:Georgia,serif;font-size:29px;margin:5px 0}.day-cover p{margin:0;font-size:13px;opacity:.9}
+.day-number{position:absolute;left:20px;top:18px;color:#fff;font-size:11px;font-weight:900;letter-spacing:.12em}
+.day-body-pro{padding:17px 18px}.day-body-pro>p{color:#58635d;line-height:1.5;margin:0 0 15px}
+.day-actions{display:flex;gap:9px}.day-open{flex:1;border:0;border-radius:13px;padding:12px;background:#183d32;color:white;font-weight:750}.day-save{width:46px;border:1px solid #ded9cc;border-radius:13px;background:#fff;font-size:22px;color:#183d32}
+.day-details{display:none;padding-top:15px}.day-card-pro.open .day-details{display:block}.day-card-pro.open .day-open{background:#e9e4d7;color:#183d32}
+.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.detail-grid>div{background:#f7f5ef;border-radius:14px;padding:11px}.detail-grid span{display:block;font-size:18px}.detail-grid b{display:block;font-size:11px;margin-top:5px}.detail-grid small{display:block;color:#747970;font-size:10px;margin-top:3px;line-height:1.3}
+.day-note{margin-top:10px;padding:12px 13px;background:#edf4ef;border-radius:13px;font-size:12px;color:#456055;line-height:1.4}
+.day-card-pro.saved{outline:2px solid #a9c4b4}
+.day-card-pro.hidden{display:none}
+@media(min-width:760px){.days-pro-section{padding:45px 30px 90px}.days-pro-list{grid-template-columns:repeat(2,1fr)}.day-cover{height:210px}}
 </style>
 
-<section id="terrain" class="appsection">
-  <div class="heroapp"><div class="eyebrow">Mode terrain</div>
-    <h1>Chaque journée, prête à vivre</h1>
-    <p>Trajet · horaires indicatifs · carte · activités · hébergement · bons réflexes</p>
+<section id="days-pro" class="days-pro-section">
+  <div class="section-head-pro">
+    <div>
+      <span class="eyebrow">LE VOYAGE, JOUR APRÈS JOUR</span>
+      <h2>Chaque journée a son histoire.</h2>
+      <p>Une lecture simple, immersive et actionnable. Ouvre une journée quand tu en as besoin.</p>
+    </div>
+    <div class="day-progress"><strong>22</strong><span>jours</span></div>
   </div>
-  <div class="terrain-grid">
-    <div class="terrain-card"><b>🧭 Aujourd'hui</b><h3 id="todayTitle">J1 · Denpasar</h3><p id="todayText">Arrivée 19h45 · installation près de l'aéroport.</p><div class="terrain-actions"><button onclick="prevDay()">←</button><button onclick="nextDay()">→</button></div></div>
-    <div class="terrain-card"><b>📍 Navigation</b><p>Les cartes et coordonnées précises seront ajoutées lorsque les lieux/points de rendez-vous seront définitivement validés.</p><div class="terrain-actions"><button onclick="alert('À connecter aux coordonnées validées')">Ouvrir la carte</button></div></div>
+  <div class="day-search-wrap">
+    <span>⌕</span><input id="daySearch" type="search" placeholder="Rechercher un lieu, une étape, une activité…" oninput="filterDays(this.value)">
   </div>
-  <div id="terrainDay"></div>
-</section>
-
-<section id="terrain-all" class="appsection">
-  <div class="heroapp"><div class="eyebrow">Vue terrain</div><h1>Les étapes en un coup d'œil</h1><p>Une fiche par journée.</p></div>
-  <div class="timeline" id="terrainTimeline"></div>
+  <div class="days-pro-list">
+    <article class="day-card-pro" data-day="1" data-search="08 déc. DPS · Arrivée à Bali Arrivée 19:45 · installation près de l’aéroport">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🌙</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Atterrissage en douceur</span>
+          <h3>DPS · Arrivée à Bali</h3>
+          <p>Arrivée 19:45 · installation près de l’aéroport</p>
+        </div>
+        <span class="day-number">J01</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Nuit calme, dîner léger et récupération avant Java.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="2" data-search="09 déc. Yogyakarta Vol matinal DPS → YIA · Prambanan · Yogyakarta">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🛕</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Premiers temples</span>
+          <h3>Yogyakarta</h3>
+          <p>Vol matinal DPS → YIA · Prambanan · Yogyakarta</p>
+        </div>
+        <span class="day-number">J02</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Installation puis découverte de Prambanan et première soirée javanaise.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="3" data-search="10 déc. Borobudur Lever de soleil · Pawon · Mendut · villages">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🌅</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Le grand matin</span>
+          <h3>Borobudur</h3>
+          <p>Lever de soleil · Pawon · Mendut · villages</p>
+        </div>
+        <span class="day-number">J03</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Lever tôt pour Borobudur puis immersion dans les villages autour du temple.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Matin très tôt</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="4" data-search="11 déc. Vers Bromo Yogyakarta → Malang · route vers Tumpang / Ngadas">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🚆</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Vers les volcans</span>
+          <h3>Vers Bromo</h3>
+          <p>Yogyakarta → Malang · route vers Tumpang / Ngadas</p>
+        </div>
+        <span class="day-number">J04</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Train puis transfert vers les hauteurs du Tengger. Soirée courte avant Bromo.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="5" data-search="12 déc. Bromo 4×4 · caldeira · cratère · paysages du Tengger">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🌋</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Journée volcan</span>
+          <h3>Bromo</h3>
+          <p>4×4 · caldeira · cratère · paysages du Tengger</p>
+        </div>
+        <span class="day-number">J05</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Garder de la souplesse météo : le spectacle dépend fortement des nuages.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="6" data-search="13 déc. Vers Ijen Bromo → Banyuwangi / Licin">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🚙</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Cap à l’est</span>
+          <h3>Vers Ijen</h3>
+          <p>Bromo → Banyuwangi / Licin</p>
+        </div>
+        <span class="day-number">J06</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Long transfert privé vers Ijen, avec arrivée suffisamment tôt pour récupérer.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="7" data-search="14 déc. Ijen Trek de nuit · lever du soleil · lac acide">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">⛰️</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">La grande ascension</span>
+          <h3>Ijen</h3>
+          <p>Trek de nuit · lever du soleil · lac acide</p>
+        </div>
+        <span class="day-number">J07</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Départ vers 01:00–01:30. Conditions volcaniques et météo à revalider avant le départ.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Matin très tôt</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="8" data-search="15 déc. Meru Betiri Banyuwangi → Rajegwesi · côte sauvage">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🌴</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Java hors des sentiers battus</span>
+          <h3>Meru Betiri</h3>
+          <p>Banyuwangi → Rajegwesi · côte sauvage</p>
+        </div>
+        <span class="day-number">J08</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Entrée progressive dans la zone sauvage de Meru Betiri.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="9" data-search="16 déc. Sukamade 4×4 · jungle · plage · tortues">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🐢</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Nuit sauvage</span>
+          <h3>Sukamade</h3>
+          <p>4×4 · jungle · plage · tortues</p>
+        </div>
+        <span class="day-number">J09</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Journée nature et observation des tortues avec accompagnement local/ranger.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="10" data-search="17 déc. Java → Bali Sukamade → Ketapang · ferry · Gilimanuk · Munduk">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">⛴️</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Changement d’île</span>
+          <h3>Java → Bali</h3>
+          <p>Sukamade → Ketapang · ferry · Gilimanuk · Munduk</p>
+        </div>
+        <span class="day-number">J10</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Traversée puis montée vers les montagnes fraîches de Munduk.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="11" data-search="18 déc. Munduk Cascades · plantations · lacs de montagne">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🌿</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Bali côté montagne</span>
+          <h3>Munduk</h3>
+          <p>Cascades · plantations · lacs de montagne</p>
+        </div>
+        <span class="day-number">J11</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Randonnée tranquille entre forêt, plantations et cascades.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="12" data-search="19 déc. Vers Sidemen Munduk → Sidemen">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🌾</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Vers les rizières</span>
+          <h3>Vers Sidemen</h3>
+          <p>Munduk → Sidemen</p>
+        </div>
+        <span class="day-number">J12</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Route panoramique vers l’est de Bali et installation dans un environnement rural.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="13" data-search="20 déc. Sidemen Rizières · villages · temples">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🥾</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Bali authentique</span>
+          <h3>Sidemen</h3>
+          <p>Rizières · villages · temples</p>
+        </div>
+        <span class="day-number">J13</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Marche dans les rizières, idéalement avec guide local pour les petits chemins.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="14" data-search="21 déc. Sidemen Journée libre nature / village">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🌾</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Respirer</span>
+          <h3>Sidemen</h3>
+          <p>Journée libre nature / village</p>
+        </div>
+        <span class="day-number">J14</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Journée volontairement moins chargée pour profiter du paysage.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="15" data-search="22 déc. Batur Lever de soleil · volcan · sources chaudes">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🔥</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Batur au réveil</span>
+          <h3>Batur</h3>
+          <p>Lever de soleil · volcan · sources chaudes</p>
+        </div>
+        <span class="day-number">J15</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Départ très matinal, puis récupération autour du lac et des sources chaudes.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Matin très tôt</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="16" data-search="23 déc. Batur → Bangli Batur · Bangli / Seribatu">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🛖</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Vers la jungle</span>
+          <h3>Batur → Bangli</h3>
+          <p>Batur · Bangli / Seribatu</p>
+        </div>
+        <span class="day-number">J16</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Journée de transition douce avant l’expérience Alasari.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="17" data-search="24 déc. Alasari Check-in 13:00 · jungle · bamboo retreat">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🎋</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Parenthèse secrète</span>
+          <h3>Alasari</h3>
+          <p>Check-in 13:00 · jungle · bamboo retreat</p>
+        </div>
+        <span class="day-number">J17</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Installation dans la villa bamboo réservée et soirée au calme.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="18" data-search="25 déc. Alasari Journée jungle · détente · nature">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🌴</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Noël dans la jungle</span>
+          <h3>Alasari</h3>
+          <p>Journée jungle · détente · nature</p>
+        </div>
+        <span class="day-number">J18</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Aucun impératif : profiter du lieu et de son environnement.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="19" data-search="26 déc. Alasari Journée libre">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🌿</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Dernière nuit sauvage</span>
+          <h3>Alasari</h3>
+          <p>Journée libre</p>
+        </div>
+        <span class="day-number">J19</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Dernière journée pleine dans la retraite.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="20" data-search="27 déc. Ubud Alasari → Ubud">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">🎨</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Retour à la culture</span>
+          <h3>Ubud</h3>
+          <p>Alasari → Ubud</p>
+        </div>
+        <span class="day-number">J20</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Transfert vers Ubud et découverte progressive du centre.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="21" data-search="28 déc. Ubud Journée libre · culture · cafés · temples">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">☕</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Dernière vraie journée</span>
+          <h3>Ubud</h3>
+          <p>Journée libre · culture · cafés · temples</p>
+        </div>
+        <span class="day-number">J21</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Garder du temps libre et préparer tranquillement le départ.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article>
+    <article class="day-card-pro" data-day="22" data-search="29 déc. Retour Ubud → DPS · vol 21:00">
+      <div class="day-cover">
+        <div class="day-cover-gradient"></div>
+        <div class="day-icon">✈️</div>
+        <div class="day-cover-text">
+          <span class="day-kicker">Derniers instants</span>
+          <h3>Retour</h3>
+          <p>Ubud → DPS · vol 21:00</p>
+        </div>
+        <span class="day-number">J22</span>
+      </div>
+      <div class="day-body-pro">
+        <p>Départ d’Ubud avec une marge confortable pour l’aéroport.</p>
+        <div class="day-actions">
+          <button class="day-open" onclick="toggleDay(this)">Voir la journée</button>
+          <button class="day-save" onclick="toggleDaySaved(this)" aria-label="Enregistrer la journée">♡</button>
+        </div>
+        <div class="day-details">
+          <div class="detail-grid">
+            <div><span>🕐</span><b>Rythme</b><small>Selon programme</small></div>
+            <div><span>🚗</span><b>Logistique</b><small>Voir transport & réservations</small></div>
+            <div><span>📍</span><b>Terrain</b><small>Carte disponible dans l’onglet Cartes</small></div>
+          </div>
+          <div class="day-note">💡 <strong>Réflexe voyageur</strong> — ouvre la fiche terrain pour les détails opérationnels et les éléments à sécuriser.</div>
+        </div>
+      </div>
+    </article></div>
 </section>
 
 <script>
-const TERRAIN=[
-["J1","8 déc.","Denpasar","Arrivée DPS 19h45","Transfert court → hôtel proche aéroport","Repos","Hôtel DPS","À confirmer"],
-["J2","9 déc.","Yogyakarta","DPS → YIA le matin","Transfert YIA → Prambanan → Yogyakarta","Prambanan + soirée Jogja","Yogyakarta","Vol DPS→YIA"],
-["J3","10 déc.","Borobudur","Départ très tôt","Sunrise Borobudur → Pawon/Mendut → villages","Temples + vélo/balade","Borobudur","Sunrise"],
-["J4","11 déc.","Malang / Bromo","Train Yogyakarta → Malang","Malang → Tumpang → accès Bromo","Installation","Accès Bromo","Train KAI"],
-["J5","12 déc.","Bromo","Départ avant l'aube","4×4 → point de vue → caldeira → cratère","Volcan","Bromo","4×4 + météo"],
-["J6","13 déc.","Ijen","Route Bromo → Banyuwangi/Licin","Transfert privé","Repos / préparation Ijen","Ijen/Banyuwangi","Chauffeur"],
-["J7","14 déc.","Ijen","Départ vers 01h00–01h30","Trek nocturne → lever du jour → lac acide","Trek volcanique","Ijen/Banyuwangi","Guide + accès"],
-["J8","15 déc.","Rajegwesi","Départ après repos","Banyuwangi → Rajegwesi / Meru Betiri en 4×4","Green Bay si conditions","Rajegwesi","4×4"],
-["J9","16 déc.","Sukamade","Piste jungle","Rajegwesi → Sukamade","Plage + tortues avec rangers","Sukamade","Rangers + 4×4"],
-["J10","17 déc.","Munduk","Départ tôt","Sukamade → Ketapang → ferry → Gilimanuk → Munduk","Soirée légère","Munduk","Transfert Java→Bali"],
-["J11","18 déc.","Munduk","Matin","Cascades + plantations + villages","Randonnée","Munduk","Guide optionnel"],
-["J12","19 déc.","Sidemen","Transfert matin","Munduk → Sidemen","Installation + balade","Sidemen","Chauffeur"],
-["J13","20 déc.","Sidemen","Matin","Rizières + villages + temples","Immersion locale","Sidemen","Guide optionnel"],
-["J14","21 déc.","Sidemen","Souple","Randonnée ou journée lente","Nature","Sidemen","—"],
-["J15","22 déc.","Batur","Départ très tôt","Mont Batur → sources chaudes","Volcan + détente","Kintamani/Batur","Guide + météo"],
-["J16","23 déc.","Bangli","Matin","Batur → lacs/villages → Bangli","Transition douce","Bangli","Chauffeur"],
-["J17","24 déc.","Alasari","Transfert","Arrivée + installation","Jungle","Alasari","Réservé"],
-["J18","25 déc.","Alasari","Souple","Exploration autour du retreat","Nature / repos","Alasari","—"],
-["J19","26 déc.","Alasari","Souple","Dernière journée jungle","Slow travel","Alasari","—"],
-["J20","27 déc.","Ubud","Transfert","Alasari → Ubud","Découverte légère","Ubud","Hébergement"],
-["J21","28 déc.","Ubud","Libre","Culture / temple / massage / balade","Journée libre","Ubud","—"],
-["J22","29 déc.","DPS","Départ Ubud avec marge","Ubud → DPS → vol 21h","Retour","—","Transfert DPS"]
-];
-let terrainIndex=0;
-function renderTerrain(i){
- const d=TERRAIN[i]; terrainIndex=i;
- document.getElementById('todayTitle').textContent=d[0]+" · "+d[2];
- document.getElementById('todayText').textContent=d[3];
- document.getElementById('terrainDay').innerHTML=`
- <div class="terrain-card" style="margin:10px">
-  <div class="date">${d[0]} · ${d[1]}</div><h3>${d[2]}</h3>
-  <div class="terrain-map">🗺️ Carte de l'étape · ${d[2]}</div>
-  <div class="terrain-grid" style="margin:0">
-   <div><b>🚗 Trajet</b><p class="route">${d[4]}</p></div>
-   <div><b>🥾 À faire</b><p>${d[5]}</p></div>
-   <div><b>🏡 Dormir</b><p>${d[6]}</p></div>
-   <div><b>📌 À sécuriser</b><p>${d[7]}</p></div>
-  </div>
-  <div class="note"><b>💡 Réflexe du jour</b><br>${i===4?"Prévoir une marge météo : le spectacle du Bromo dépend des conditions.":i===6?"Départ nocturne : vérifier les conditions d'accès et préparer vêtements chauds, chaussures et lampe.":i===8?"La piste de Sukamade impose un véhicule adapté et une organisation locale.":i===16?"Alasari est réservé du 24 au 27 décembre : garder cette journée volontairement légère.":i===21?"Ne pas serrer l'horaire : conserver une large marge pour rejoindre DPS avant le vol de 21h.":"Conserver de la souplesse et privilégier l'expérience plutôt que l'accumulation d'activités."}</div>
- </div>`;
+function toggleDay(btn){btn.closest('.day-card-pro').classList.toggle('open')}
+function toggleDaySaved(btn){
+ const c=btn.closest('.day-card-pro'); c.classList.toggle('saved');
+ const id=c.dataset.day; let saved=JSON.parse(localStorage.getItem('indonesiaSavedDays')||'[]');
+ if(c.classList.contains('saved')){if(!saved.includes(id))saved.push(id);btn.textContent='♥'}
+ else{saved=saved.filter(x=>x!==id);btn.textContent='♡'}
+ localStorage.setItem('indonesiaSavedDays',JSON.stringify(saved))
 }
-function prevDay(){renderTerrain((terrainIndex+TERRAIN.length-1)%TERRAIN.length)}
-function nextDay(){renderTerrain((terrainIndex+1)%TERRAIN.length)}
-function showTerrain(){showTab('terrain');renderTerrain(terrainIndex)}
-const tl=document.getElementById('terrainTimeline');
-if(tl) tl.innerHTML=TERRAIN.map((d,i)=>`<div class="titem"><span class="dot"></span><div class="terrain-card"><div class="date">${d[0]} · ${d[1]}</div><h3>${d[2]}</h3><p>${d[4]}</p><button onclick="terrainIndex=${i};showTerrain()" style="border:0;border-radius:10px;padding:9px 11px;background:#edf3ee;color:#173b2c;font-weight:700">Ouvrir la fiche</button></div></div>`).join('');
-renderTerrain(0);
+function filterDays(q){
+ q=q.toLowerCase().trim();
+ document.querySelectorAll('.day-card-pro').forEach(c=>c.classList.toggle('hidden',q && !c.dataset.search.toLowerCase().includes(q)))
+}
+document.addEventListener('DOMContentLoaded',()=>{
+ let saved=JSON.parse(localStorage.getItem('indonesiaSavedDays')||'[]');
+ document.querySelectorAll('.day-card-pro').forEach(c=>{if(saved.includes(c.dataset.day)){c.classList.add('saved');c.querySelector('.day-save').textContent='♥'}})
+})
 </script>
 
-<section id="cartes" class="appsection">
- <div class="heroapp"><div class="eyebrow">Cartographie réelle</div>
-  <h1>Les cartes du voyage</h1>
-  <p>Fond cartographique OpenStreetMap · points GPS · itinéraires indicatifs · accès navigation.</p>
- </div>
- <div class="terrain-card" style="margin:10px">
-   <b>🗺️ Vue globale Java → Bali</b>
-   <div id="mapGlobal" class="realmap"></div>
-   <div class="mapmeta"><span>📍 14 points</span><span>🌋 Java + Bali</span><span>🧭 GPS</span></div>
-   <div class="maplinks"><a target="_blank" rel="noopener" href="https://www.openstreetmap.org/#map=8/-8.0/113.7">Ouvrir dans OpenStreetMap</a></div>
- </div>
- <div id="stageMaps"></div>
- <div class="terrain-card" style="margin:10px;background:#fff8e8">
-  <b>ℹ️ Important</b>
-  <p style="margin-bottom:0">Les marqueurs correspondent aux lieux/secteurs du parcours. Les lignes entre étapes sont des liaisons indicatives, pas un calcul routier : les temps et distances exacts seront à verrouiller avec les chauffeurs et les conditions locales.</p>
- </div>
-</section>
-
-<section id="bonsplans" class="appsection">
- <div class="heroapp"><div class="eyebrow">Collecte voyageurs · 2026</div>
-  <h1>Les bons plans du terrain</h1>
-  <p>Conseils issus de forums et retours voyageurs. Les témoignages sont signalés comme tels : ils ne remplacent pas les informations officielles.</p>
- </div>
-
- <div class="forum-card">
-  <span class="forum-tag">YOGYAKARTA</span><h3>🏘️ Prawirotaman plutôt que courir après les sites</h3>
-  <ul><li>Les voyageurs décrivent Prawirotaman comme agréable pour dormir et manger, tandis que Borobudur peut être intéressant pour une nuit si l'objectif principal est le temple.</li>
-      <li>Un fil récent cite aussi Sate Ratu, Gudeg Yu Djum, Raminten et quelques adresses locales comme pistes culinaires.</li></ul>
-  <div class="source">Sources voyageurs : <a target="_blank" href="https://www.reddit.com/r/indonesia/comments/1r64smj/staying_in_malioboro_vs_prawirotaman/">Reddit · Malioboro vs Prawirotaman</a> · <a target="_blank" href="https://www.reddit.com/r/indonesia/comments/1uh9hnh/3_days_in_yogyakarta_what_to_do_see_and_where_to/">Reddit · 3 jours à Yogyakarta</a></div>
- </div>
-
- <div class="forum-card">
-  <span class="forum-tag">BOROBUDUR</span><h3>🌅 Sunrise : réserver en connaissance de cause</h3>
-  <ul><li>Des voyageurs récents décrivent une gestion spécifique des accès à la structure et une capacité limitée pour les créneaux sunrise.</li>
-      <li>Les retours sont partagés sur l'intérêt du sunrise : l'avantage cité est la fraîcheur et une fréquentation plus faible ; certains préfèrent 8–9h pour mieux voir le monument.</li></ul>
-  <div class="warn"><b>À vérifier avant achat :</b> ce que comprend exactement le billet sunrise 2026 et les règles d'accès à la structure.</div>
-  <div class="source"><a target="_blank" href="https://www.reddit.com/r/indonesia/comments/1v4klj8/confused_about_borobudur_tour_logistics_and_timing/">Reddit · logistique Borobudur 2026</a> · <a target="_blank" href="https://www.tripadvisor.com/ShowTopic-g294225-i7219-k15545688-Borobudur_sunrise_tour_and_the_Structure_tour-Indonesia.html">Tripadvisor · sunrise / structure tour</a></div>
- </div>
-
- <div class="forum-card">
-  <span class="forum-tag">BROMO</span><h3>🌋 Dormir à Cemoro Lawang change la journée</h3>
-  <ul><li>Des voyageurs et intervenants locaux recommandent de dormir à Cemoro Lawang pour pouvoir adapter l'heure et choisir entre plusieurs points de vue.</li>
-      <li>Un fil de mai 2026 discute explicitement d'une alternative au « jeep convoy » : marche avec guide local ou déplacement local vers Seruni/cratère, puis continuation vers Banyuwangi.</li>
-      <li>Une autre idée ressort : si la foule du lever de soleil est trop importante, envisager une fenêtre plus tardive plutôt que de subir le rythme du groupe.</li></ul>
-  <div class="source"><a target="_blank" href="https://www.tripadvisor.com/ShowTopic-g1144644-i19952-k15535353-Sunset_point_in_Cemoro_Lawang-Probolinggo_Forum.html">Tripadvisor · Cemoro Lawang 2026</a> · <a target="_blank" href="https://www.tripadvisor.com/ShowTopic-g294228-i9251-k15537977-Avoiding_the_sunrise_crowds_at_Bromo_and_Ijen-Java.html">Tripadvisor · éviter les foules à Bromo/Ijen</a></div>
- </div>
-
- <div class="forum-card">
-  <span class="forum-tag">IJEN</span><h3>🥾 Ne pas faire du « blue fire » l'unique objectif</h3>
-  <ul><li>Des témoignages récents indiquent que l'accès aux zones de blue fire peut varier fortement selon les conditions de sécurité, incendies, gaz ou restrictions.</li>
-      <li>Plusieurs voyageurs considèrent le bord du cratère et le paysage comme l'intérêt majeur, y compris lors d'une visite plus tardive.</li>
-      <li>Chaussures avec bonne accroche, lampe et vêtements chauds reviennent régulièrement dans les conseils.</li></ul>
-  <div class="warn"><b>Pour décembre 2026 :</b> revalider l'ouverture et les zones accessibles juste avant le trek. Ne jamais considérer le blue fire comme garanti.</div>
-  <div class="source"><a target="_blank" href="https://www.reddit.com/r/bali/comments/1w9usb5/mt_ijen_questions/">Reddit · Ijen, septembre 2026</a> · <a target="_blank" href="https://www.reddit.com/r/BaliTravelTips/comments/1wpkbxr/ijen_blue_flame/">Reddit · blue flame, septembre 2026</a></div>
- </div>
-
- <div class="forum-card">
-  <span class="forum-tag">MERU BETIRI · SUKAMADE</span><h3>🐢 Le vrai bon plan : organiser l'expérience locale</h3>
-  <ul><li>Un retour Routard décrit une arrivée en 4×4, une nuit simple, une sortie nocturne avec le parc pour observer une tortue pondre, puis le lâcher de bébés tortues le matin.</li>
-      <li>Le même voyageur considère l'expérience comme l'un des moments forts de son voyage et estime qu'une nuit sur place peut suffire.</li>
-      <li>Les retours plus anciens soulignent la piste difficile et l'intérêt d'un guide/garde forestier.</li></ul>
-  <div class="source"><a target="_blank" href="https://www.routard.com/forums/t/java-sukamade-beach/300960">Routard · Sukamade Beach</a> · <a target="_blank" href="https://www.routard.com/forums/t/parc-national-de-meru-betiri-java/5814">Routard · Meru Betiri</a></div>
- </div>
-
- <div class="forum-card">
-  <span class="forum-tag">MUNDUK</span><h3>🌿 Prévoir un chauffeur local</h3>
-  <ul><li>Un fil Reddit récent signale que Grab/Gojek sont peu disponibles dans le secteur.</li>
-      <li>Les voyageurs recommandent les cascades, plantations et chemins de randonnée, et certains recommandent 2–3 nuits pour profiter du changement d'ambiance.</li>
-      <li>Pour Sekumpul, un retour conseille un chauffeur local et mentionne même la possibilité d'utiliser un deux-roues sur une partie de l'accès selon les conditions.</li></ul>
-  <div class="source"><a target="_blank" href="https://www.reddit.com/r/BaliTravelTips/comments/1shjuaw/munduk_area/">Reddit · Munduk 2026</a></div>
- </div>
-
- <div class="forum-card">
-  <span class="forum-tag">SIDEMEN</span><h3>🌾 Marcher dans les rizières, mais avec de bonnes chaussures</h3>
-  <ul><li>Les retours récents décrivent une boucle d'environ 3 km / 1 h, avec possibilité de guide, et une participation locale modeste signalée autour de 25 000 IDR.</li>
-      <li>Après pluie, certaines portions étroites peuvent devenir glissantes : chaussures fermées recommandées.</li>
-      <li>Un guide local est apprécié pour sortir des chemins évidents et comprendre le paysage agricole.</li>
-      <li>Un warung avec vue est également cité dans les retours voyageurs.</li></ul>
-  <div class="source"><a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g608495-d32768167-Reviews-Sidemen_Rice_Terrace_Sidemen-Sidemen_Karangasem_Bali.html">Tripadvisor · Sidemen Rice Terrace</a> · <a target="_blank" href="https://www.tripadvisor.com/ShowTopic-g608495-i15337-k15381059-Few_days_in_Sidemen-Sidemen_Karangasem_Bali.html">Tripadvisor · quelques jours à Sidemen</a></div>
- </div>
-
- <div class="forum-card">
-  <span class="forum-tag">BATUR / KINTAMANI</span><h3>♨️ Volcan + sources chaudes, mais météo d'abord</h3>
-  <ul><li>Les voyageurs associent volontiers randonnée de Batur et sources chaudes après l'effort.</li>
-      <li>Les retours récents insistent sur le fait que la météo peut transformer complètement l'expérience : nuages au sommet, pluie en bas ou inversement.</li>
-      <li>Un conseil récurrent est de garder de la flexibilité quand c'est possible plutôt que de verrouiller trop tôt une activité météo-dépendante.</li></ul>
-  <div class="source"><a target="_blank" href="https://www.reddit.com/r/BaliTravelTips/comments/1sej8d7/mount_batur_excursion/">Reddit · Mount Batur</a> · <a target="_blank" href="https://www.reddit.com/r/BaliTravelTips/comments/1riwlyj/hotsprings_in_bali/">Reddit · sources chaudes de Bali</a></div>
- </div>
-
- <div class="forum-card">
-  <span class="forum-tag">UBUD</span><h3>🌴 Utiliser Ubud comme base, pas comme centre commercial</h3>
-  <ul><li>Pour les deux dernières nuits, chercher un secteur permettant de marcher vers les zones vertes plutôt que de privilégier uniquement la proximité du marché central.</li>
-      <li>Le principe récurrent dans les retours voyageurs : démarrer tôt les sites très fréquentés puis revenir vers des quartiers plus calmes.</li></ul>
-  <div class="source"><a target="_blank" href="https://www.reddit.com/r/BaliTravelTips/comments/1w78qy8/where_to_go_for_last_3_days_in_bali/">Reddit · derniers jours à Bali</a></div>
- </div>
-
- <div class="forum-card" style="background:#173b2c;color:white">
-  <h3>🧠 Notre règle pour le carnet</h3>
-  <p>Un conseil isolé n'est pas présenté comme une vérité. Les informations qui reviennent dans plusieurs témoignages passent en « bon plan récurrent ». Les informations sensibles — horaires, fermetures, tarifs, accès aux volcans — restent marquées « à vérifier » avant le départ.</p>
- </div>
-</section>
-<nav class="appnav">
-  <button class="active" data-tab="accueil" onclick="showTab('accueil')"><span>⌂</span>Accueil</button>
-  <button data-tab="itineraire" onclick="showTab('itineraire')"><span>🗓️</span>Jours</button>
-  <button data-tab="reserver" onclick="showTab('reserver')"><span>📌</span>Réserver</button>
-  <button data-tab="terrain" onclick="showTab('terrain');renderTerrain(terrainIndex)"><span>🧭</span>Terrain</button><button data-tab="cartes" onclick="showTab('cartes')"><span>🗺️</span>Cartes</button><button data-tab="bonsplans" onclick="showTab('bonsplans')"><span>💎</span>Bons plans</button><button data-tab="checklist" onclick="showTab('checklist')"><span>🎒</span>Check-list</button>
-</nav>
-
-<script>
-const DAYS=[["J1", "8 déc.", "Denpasar", "Arrivée 19h45 · transfert court · repos", "DPS", "Hôtel proche aéroport"], ["J2", "9 déc.", "Yogyakarta", "Vol DPS→YIA · Prambanan · découverte Jogja", "Yogyakarta", "Vol DPS→YIA"], ["J3", "10 déc.", "Borobudur", "Lever du soleil · Pawon/Mendut · villages", "Borobudur", "Sunrise Borobudur"], ["J4", "11 déc.", "Malang / Bromo", "Retour Jogja · train vers Malang · transfert Bromo", "Accès Bromo", "Train KAI"], ["J5", "12 déc.", "Bromo", "4×4 · caldeira · cratère · marge météo", "Bromo", "4×4 + guide"], ["J6", "13 déc.", "Ijen", "Route Bromo→Banyuwangi/Licin · repos", "Ijen/Banyuwangi", "Chauffeur privé"], ["J7", "14 déc.", "Ijen", "Trek de nuit · lever du jour · lac acide", "Ijen/Banyuwangi", "Guide + conditions d'accès"], ["J8", "15 déc.", "Meru Betiri", "4×4 · Rajegwesi · Green Bay si conditions", "Rajegwesi", "4×4 + organisation locale"], ["J9", "16 déc.", "Sukamade", "Jungle · plage · observation des tortues avec rangers", "Sukamade", "Ranger / 4×4"], ["J10", "17 déc.", "Munduk", "Java→Bali · ferry · arrivée douce", "Munduk", "Transfert + ferry"], ["J11", "18 déc.", "Munduk", "Cascades · plantations · villages", "Munduk", "Guide optionnel"], ["J12", "19 déc.", "Sidemen", "Route montagne · installation · balade", "Sidemen", "Chauffeur"], ["J13", "20 déc.", "Sidemen", "Rizières · villages · temples", "Sidemen", "Guide local optionnel"], ["J14", "21 déc.", "Sidemen", "Journée lente · randonnée ou immersion", "Sidemen", "—"], ["J15", "22 déc.", "Batur", "Départ très tôt · Batur · sources chaudes", "Kintamani/Batur", "Guide + météo"], ["J16", "23 déc.", "Batur / Bangli", "Lacs · villages · transition vers jungle", "Bangli", "Chauffeur"], ["J17", "24 déc.", "Alasari", "Arrivée · jungle · installation", "Alasari", "Réservé"], ["J18", "25 déc.", "Alasari", "Journée lente · nature", "Alasari", "—"], ["J19", "26 déc.", "Alasari", "Jungle · repos · exploration douce", "Alasari", "—"], ["J20", "27 déc.", "Ubud", "Transfert · installation · découverte", "Ubud", "Hébergement"], ["J21", "28 déc.", "Ubud", "Journée libre · culture · temple / massage", "Ubud", "—"], ["J22", "29 déc.", "DPS / retour", "Matinée Ubud · transfert anticipé · vol 21h", "✈️", "Transfert DPS"]];
-function showTab(id){
-  document.querySelectorAll('.appsection').forEach(x=>x.classList.remove('active'));
-  const el=document.getElementById(id); if(el) el.classList.add('active');
-  document.querySelectorAll('.appnav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function goMaster(){
-  const m=document.getElementById('master');
-  if(m){ m.scrollIntoView({behavior:'smooth'}); }
-  else showTab('reserver');
-}
-const dc=document.getElementById('daycards');
-if(dc) dc.innerHTML=DAYS.map((d,i)=>`
-  <article class="daycard">
-    <div class="date">${d[0]} · ${d[1]}</div>
-    <h3>${d[2]}</h3>
-    <p>${d[3]}</p>
-    <span class="pill">🏡 ${d[4]}</span>
-    <span class="pill">📌 ${d[5]}</span>
-    <details><summary>Voir les bons réflexes</summary>
-      <p>${i===0?'Arrivée tardive : privilégier une nuit simple et pratique près de DPS.':
-             i===4?'Garder une marge météo : le lever du soleil à Bromo dépend des conditions.':
-             i===6?'Départ nocturne : prévoir vêtements chauds, chaussures adaptées et vérifier les conditions d’accès avant le départ.':
-             i===8?'Journée très nature : organiser les 4×4 et les rangers en amont.':
-             i===16?'Alasari est réservé du 24 au 27 décembre : profiter d’un rythme lent dans la jungle.':
-             i===21?'Ne pas serrer le transfert : conserver une large marge avant le vol de 21h.':
-             'Préserver un rythme souple et réserver les transferts structurants à l’avance.'}</p>
-    </details>
-  </article>`).join('');
-</script>
-
-<script id="real-maps-js">
-const REALPOINTS=[["DPS", "Denpasar / Ngurah Rai", -8.7482, 115.1671], ["YOG", "Yogyakarta", -7.7956, 110.3695], ["PRA", "Prambanan", -7.7522, 110.4917], ["BOR", "Borobudur", -7.608, 110.204], ["MLG", "Malang", -7.9839, 112.6214], ["BRM", "Bromo / Cemoro Lawang", -7.9425, 112.953], ["IJE", "Ijen / Paltuding", -8.058, 114.242], ["RAJ", "Rajegwesi", -8.565, 113.907], ["SUK", "Sukamade", -8.55, 113.96], ["MUN", "Munduk", -8.266, 115.077], ["SID", "Sidemen", -8.484, 115.446], ["BAT", "Kintamani / Batur", -8.2397, 115.375], ["ALA", "Alasari / Pengiangan", -8.39468, 115.34068], ["UBD", "Ubud", -8.5069, 115.2625]];
-const R=Object.fromEntries(REALPOINTS.map(p=>[p[0],p]));
-const STAGES=[
- ["J1","Denpasar",["DPS"]],
- ["J2","Yogyakarta / Prambanan",["DPS","YOG","PRA"]],
- ["J3","Borobudur",["YOG","BOR"]],
- ["J4","Malang / accès Bromo",["YOG","MLG","BRM"]],
- ["J5","Bromo",["BRM"]],
- ["J6","Bromo → Ijen",["BRM","IJE"]],
- ["J7","Ijen",["IJE"]],
- ["J8","Meru Betiri / Rajegwesi",["IJE","RAJ"]],
- ["J9","Rajegwesi → Sukamade",["RAJ","SUK"]],
- ["J10","Sukamade → Munduk",["SUK","MUN"]],
- ["J11","Munduk",["MUN"]],
- ["J12","Munduk → Sidemen",["MUN","SID"]],
- ["J13","Sidemen",["SID"]],
- ["J14","Sidemen",["SID"]],
- ["J15","Sidemen → Batur",["SID","BAT"]],
- ["J16","Batur → Bangli",["BAT","ALA"]],
- ["J17","Alasari",["ALA"]],
- ["J18","Alasari",["ALA"]],
- ["J19","Alasari",["ALA"]],
- ["J20","Alasari → Ubud",["ALA","UBD"]],
- ["J21","Ubud",["UBD"]],
- ["J22","Ubud → DPS",["UBD","DPS"]]
-];
-
-function makeMap(elId, codes, zoom=10){
- const el=document.getElementById(elId); if(!el) return;
- const map=L.map(elId,{scrollWheelZoom:false});
- L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
- const latlngs=[];
- codes.forEach((code,i)=>{
-   const p=R[code]; if(!p) return;
-   const ll=[p[2],p[3]]; latlngs.push(ll);
-   L.marker(ll).addTo(map).bindPopup('<b>'+p[1]+'</b><br>'+p[2].toFixed(5)+', '+p[3].toFixed(5));
- });
- if(latlngs.length>1) L.polyline(latlngs,{weight:4,dashArray:'8 8'}).addTo(map);
- if(latlngs.length===1) map.setView(latlngs[0],zoom);
- else map.fitBounds(L.latLngBounds(latlngs),{padding:[25,25]});
- return map;
-}
-
-function initRealMaps(){
- makeMap('mapGlobal',REALPOINTS.map(p=>p[0]),7);
- const holder=document.getElementById('stageMaps'); if(!holder) return;
- holder.innerHTML=STAGES.map((st,i)=>{
-   const first=R[st[2][0]], last=R[st[2][st[2].length-1]];
-   const q=encodeURIComponent(st[2].map(c=>R[c][2]+','+R[c][3]).join(';'));
-   return `<div class="terrain-card" style="margin:10px">
-     <div class="date">${st[0]}</div><h3>${st[1]}</h3>
-     <div id="stageMap${i}" class="realmap"></div>
-     <div class="maplinks">
-       <a target="_blank" rel="noopener" href="https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${q}">Itinéraire OSM ↗</a>
-       <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=${first[2]},${first[3]}&destination=${last[2]},${last[3]}">Navigation Google ↗</a>
-     </div>
-   </div>`;
- }).join('');
- STAGES.forEach((st,i)=>setTimeout(()=>makeMap('stageMap'+i,st[2],9),20+i*20));
-}
-
-const oldShowTab=window.showTab;
-window.showTab=function(id){
- oldShowTab(id);
- if(id==='cartes') setTimeout(initRealMaps,100);
-};
-setTimeout(()=>{ if(document.getElementById('cartes')) initRealMaps(); },300);
-</script>
 </body></html>
