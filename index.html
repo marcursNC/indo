@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c241c">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Gloock&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <meta name="description" content="Carnet de voyage premium — Indonésie Java & Bali, décembre 2026">
 <title>Indonésie 2026 · Carnet de voyage</title>
 <link rel="preconnect" href="https://unpkg.com">
@@ -25,7 +26,26 @@
 @media(max-width:760px){.stage-photo{height:150px}.hero-card{min-height:520px}.hero-copy{padding:34px 24px}.moon{width:130px;height:130px;right:5%;top:12%}.overview{grid-template-columns:1fr}.days{grid-template-columns:1fr}.checkgrid{grid-template-columns:1fr}.hotel{grid-template-columns:1fr}.hotel-actions{justify-content:flex-start}.map{height:330px}.section{padding:22px 0}.stage-summary{padding:15px}.stage-right{display:none}.microgrid{grid-template-columns:repeat(3,1fr)}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-</head>
+<style id="claude-hybrid">
+:root{--ink:#1C2544;--ink2:#525A76;--muted:#8A90A6;--green:#2F7A4F;--green2:#245f3d;--lime:#DCEBDF;--gold:#D9A91E;--lava:#C4432B;--tide:#2F6F8F;--paper:#EDF1EA;--paper2:#F9FBF7;--line:#D6DDD3}
+body{font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink)}
+h1,h2,.hero h1,.next h3{font-family:"Gloock",Georgia,serif;font-weight:400}
+.hero-card{background:radial-gradient(circle at 75% 20%,#497d5f 0,#214d3a 28%,#0d2a20 66%,#071a14 100%)}
+.hero-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.22)),url('assets/images/hero-indonesie-2026.jpg') center/cover;opacity:.18;mix-blend-mode:screen;pointer-events:none}
+.hero-copy{position:relative;z-index:3}
+.panel,.stage,.map,.checkgrid>*{box-shadow:0 10px 30px rgba(20,48,36,.06)}
+.gallery-hybrid{margin-top:18px}
+.gallery-hybrid-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.gallery-hybrid-head h2{margin:0;font-size:28px}.gallery-hybrid-head p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.gallery-hybrid-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.gcard{position:relative;height:154px;border:0;padding:0;overflow:hidden;border-radius:18px;background:#dfe5dc;color:#fff;text-align:left}
+.gcard:first-child{grid-column:span 2;height:205px}.gcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}.gcard:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 32%,rgba(0,0,0,.75));pointer-events:none}.gcard:hover img{transform:scale(1.04)}
+.gcopy{position:absolute;left:13px;right:13px;bottom:11px;z-index:2}.gcopy small{display:block;font-size:9px;letter-spacing:.13em;text-transform:uppercase;font-weight:800;opacity:.85}.gcopy b{display:block;font:400 20px/1.05 "Gloock",Georgia,serif;margin-top:4px}
+.night-strip-hybrid{margin-top:14px;background:var(--paper2);border:1px solid var(--line);border-radius:18px;padding:14px}.night-strip-hybrid .nh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}.night-strip-hybrid .nh b{font-size:15px}.night-strip-hybrid .nh span{font-size:12px;color:var(--muted)}
+.nights-h{display:grid;grid-template-columns:repeat(21,1fr);gap:3px}.nbox{height:34px;border-radius:5px;background:#e7ece5;display:grid;place-items:center;font-size:9px;color:#66706b}.nbox.fixed{background:var(--green);color:#fff}.nbox.todo{background:#F6DDD6;color:var(--lava);box-shadow:inset 0 0 0 1px var(--lava)}
+@media(min-width:760px){.gallery-hybrid-grid{grid-template-columns:repeat(4,1fr)}.gcard:first-child{grid-column:span 2;grid-row:span 2;height:318px}}
+@media(max-width:520px){.hero-card{min-height:420px}.hero-copy{padding:34px 24px}.gallery-hybrid-head h2{font-size:24px}}
+</style></head>
 <body>
 <div class="app">
 <header class="top"><div class="wrap topin"><a class="brand" href="#accueil" onclick="go('accueil')"><span class="brandmark">🌿</span><span><strong>INDONÉSIE · 2026</strong><small>Java → Bali · carnet de route</small></span></a><div class="top-actions"><button class="iconbtn" aria-label="Revenir à l'accueil" onclick="go('accueil')">⌂</button><button class="iconbtn" aria-label="Réinitialiser les choix" onclick="resetChoices()">↺</button></div></div></header>
@@ -48,6 +68,21 @@
   <div class="panel next"><div><span class="kicker">Prochaine étape</span><h3 id="nextTitle">Yogyakarta</h3><p id="nextText">9 déc. · Prambanan · découverte de Jogja</p></div><button onclick="openDay(1)">Ouvrir la fiche →</button></div>
  </div>
 </section>
+<section class="wrap section gallery-hybrid" id="galerie">
+<div class="gallery-hybrid-head"><div><span class="kicker">Le voyage en images</span><h2>Java sauvage. Bali intime.</h2><p>Les grandes étapes, d'un coup d'œil.</p></div><span class="muted">11 vues</span></div>
+<div class="gallery-hybrid-grid">
+<button class="gcard" onclick="go('itineraire');openDay(0)"><img src="assets/images/hero-indonesie-2026.jpg" alt="Indonésie 2026"><span class="gcopy"><small>Le fil rouge</small><b>Java → Bali</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(1)"><img src="assets/images/prambanan.jpg" alt="Prambanan"><span class="gcopy"><small>09 déc.</small><b>Yogyakarta</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(2)"><img src="assets/images/borobudur.jpg" alt="Borobudur"><span class="gcopy"><small>10 déc.</small><b>Borobudur</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(4)"><img src="assets/images/bromo.jpg" alt="Bromo"><span class="gcopy"><small>12 déc.</small><b>Bromo</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(6)"><img src="assets/images/ijen.jpg" alt="Ijen"><span class="gcopy"><small>14 déc.</small><b>Ijen</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(7)"><img src="assets/images/meru-betiri.jpg" alt="Meru Betiri"><span class="gcopy"><small>15–16 déc.</small><b>Meru Betiri</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(9)"><img src="assets/images/munduk.jpg" alt="Munduk"><span class="gcopy"><small>17–18 déc.</small><b>Munduk</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(11)"><img src="assets/images/sidemen.jpg" alt="Sidemen"><span class="gcopy"><small>19–21 déc.</small><b>Sidemen</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(14)"><img src="assets/images/batur.jpg" alt="Batur"><span class="gcopy"><small>22–23 déc.</small><b>Batur</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(16)"><img src="assets/images/alasari.jpg" alt="Alasari"><span class="gcopy"><small>24–26 déc.</small><b>Alasari</b></span></button>
+<button class="gcard" onclick="go('itineraire');openDay(19)"><img src="assets/images/ubud.jpg" alt="Ubud"><span class="gcopy"><small>27–29 déc.</small><b>Ubud</b></span></button>
+</div></section>
 <section class="wrap section" id="itineraire">
  <div class="section-head"><div><span class="kicker">22 jours · 3 semaines</span><h2>L'itinéraire</h2><p>Fais défiler les jours, puis ouvre une fiche quand tu veux entrer dans le détail.</p></div></div>
  <div class="timeline" id="timeline"></div><div class="days" id="days"></div>
