@@ -1,28 +1,25 @@
-# 🇮🇩 Indonésie 2026 — carnet de voyage
+# Indonésie 2026 · Java → Bali
 
-Version smartphone / GitHub Pages du voyage Java → Bali, du 8 au 29 décembre 2026.
+Carnet de voyage web, mobile-first et opérationnel, pour un voyage de deux personnes du 8 au 29 décembre 2026.
 
-## 🖼️ Visuels
+## Fichiers
 
-Les visuels sont **intégrés physiquement dans le dépôt** dans `assets/images/`. Le site ne dépend donc pas d'un téléchargement d'images au moment du déploiement.
+- `index.html` — l'application complète (données, styles, logique)
+- `sw.js` — mode hors connexion (cache de l'application, des photos et des tuiles consultées)
+- `manifest.webmanifest`, `icon.svg` — installation sur l'écran d'accueil
 
-Les images sont des créations originales générées pour ce carnet, puis découpées et optimisées pour l'affichage mobile.
+## Contenu
 
-## 📱 Publication sur GitHub Pages
+Accueil (situation du jour, bagages, échéances, galerie), itinéraire par étapes et jour par jour,
+fiche complète par lieu (programme, visites, pratique, culture, hébergements), réservations
+(nuits, trajets, activités, conseils transport), cartes (interactive + hors connexion), checklist.
 
-1. Créer un dépôt GitHub.
-2. Copier le contenu de ce dossier dans le dépôt.
-3. Pousser sur la branche `main`.
-4. Le workflow `.github/workflows/pages.yml` publie automatiquement le site avec GitHub Pages.
+## Données
 
-## Structure
+- Choix et statuts enregistrés dans le `localStorage` du navigateur, sur chaque appareil.
+- Photos chargées depuis l'API de Wikipédia (Wikimedia Commons, licences libres), crédit affiché.
+- Aucune donnée personnelle dans ce dépôt public.
 
-- `index.html` — carnet interactif
-- `assets/images/` — visuels locaux
-- `assets/icon.svg` — icône
-- `manifest.webmanifest` — configuration PWA
-- `.github/workflows/pages.yml` — publication GitHub Pages
+## Déploiement
 
-## 📲 Smartphone
-
-L'interface est conçue mobile-first : grandes images, cartes verticales, navigation tactile, progression du voyage, carte interactive et accès rapide aux réservations/étapes.
+GitHub Pages : Settings → Pages → Deploy from a branch → `main` / root.
